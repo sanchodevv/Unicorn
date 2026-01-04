@@ -1,0 +1,42 @@
+:root {
+    --font: 'Roboto', sans-serif;
+
+
+    /* side bar colors */
+    --sidebar-1: #343743;
+    --sidebar-2: #343743CC;
+    --sidebar-3: #5D5F69;
+
+    /* background colors  */
+    --bg-color: #272A30;
+    /* icon color */
+    --icon-color: #9B74F0;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+a{
+    text-decoration: none;
+    color: inherit;
+}
+button{
+    cursor: pointer;
+    border: none;
+}
+body{
+    font-family: var(--font);
+    background-color: var(--bg-color);
+    color: white;
+}
+.main{
+    display: flex;
+    background-color: var(--bg-color);
+    color: white;
+    margin-left: 250px;
+    /* gap: 680px; */
+}
+.wrap{
+    display: flex;
+}

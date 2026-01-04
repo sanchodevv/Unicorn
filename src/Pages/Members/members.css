@@ -1,0 +1,44 @@
+.ant-spin-container{
+    background: #343743;
+    margin-top: 164px;
+    margin-left: 60px;
+    border-radius: 20px;
+}
+.ant-table-thead{
+    background: #343743;
+}
+.ant-table-cell{
+    background: #343743;
+    border: none;
+}
+.inp{
+    margin-left: 64px;
+    max-width: 424px;
+    height: 44px;
+    color: aliceblue;
+}
+.inp input{
+    padding:  14px 275px 14px 16px;
+    /* height: 44px; */
+    border-radius: 20px;
+    border: none;
+    background: #343743;
+}
+.sle{
+    width: 100xx;
+    /* background: #343743; */
+}
+.sle select{
+    padding:  14px;
+    /* height: 44px; */
+    border-radius: 20px;
+    border: none;
+    background: #343743;
+    background: #343743;
+}
+.uno{
+    margin-top: 94px;
+    gap: 296px;
+    color: white;
+    display: flex;
+}
