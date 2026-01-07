@@ -25,7 +25,7 @@
     background: #343743;
 }
 .sle{
-    width: 100xx;
+    width: 100xx;   
     /* background: #343743; */
 }
 .sle select{
@@ -41,4 +41,11 @@
     gap: 296px;
     color: white;
     display: flex;
+}
+.ant-table-cell{
+    background-color: #343743 !important;
+}
+.ant-tablet{
+    background-color: #343743 !important;
+    border: 1px solid #343743 !important;            
 }

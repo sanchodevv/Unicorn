@@ -37,6 +37,7 @@ aside{
     /* margin-top: 30px; */
     gap: 16px;
     transition: all 0.3s ease;
+    position: relative;
     
 }
 .link:hover{
@@ -53,6 +54,17 @@ aside{
     background-color: #9B74F033;
     /* border-radius: 16px; */
 }
+.arrow {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%) rotate(0deg);
+    transition: transform 0.3s ease;
+    font-size: 12px;
+}
+.arrow.rotated {
+    transform: translateY(-50%) rotate(180deg);
+}
 .exit{
     position: absolute;
     bottom: 30px;
@@ -61,4 +73,18 @@ aside{
     align-items: center;
     gap: 16px;
     /* width: 100%; */
+}
+.membership-submenu {
+    margin-left: 26px;
+    margin-right: 26px;
+    overflow: hidden;
+    transform: translateY(100%);
+    opacity: 0;
+    max-height: 0;
+    transition: all 0.3s ease;
+}
+.membership-submenu.open {
+    transform: translateY(0);
+    opacity: 1;
+    max-height: 60px; /* Adjust for one item */
 }

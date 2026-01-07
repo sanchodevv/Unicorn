@@ -1,6 +1,7 @@
 import Home from "../Pages/Home/home"
 import Invertory from "../Pages/Invertory/invertory";
-import Members from "../Pages/Members/members";
+import { default as MemberComponent } from "../Pages/Members/members";
+import Membership from "../Pages/Members/Membership/membership";
 import Payments from "../Pages/Payments/payments";
 import Pos from "../Pages/Pos/pos";
 import Products from "../Pages/Products/products";
@@ -16,7 +17,7 @@ export const routes = [
     {
         key: 1, 
         path: "/members",
-        element: Members
+        element: MemberComponent
     },
     {
         key:2,
@@ -43,6 +44,11 @@ export const routes = [
         key: 6,
         path: "/payments",
         element: Payments
+    },
+    {
+        key: 7,
+        path: "/membership",
+        element: Membership
     }
     
 
