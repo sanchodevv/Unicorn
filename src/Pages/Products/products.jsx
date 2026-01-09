@@ -37,7 +37,7 @@ const columns = [
     key: 'action',
     render: (_, record) => (
       <span>
-        <a style={{ marginRight: 16 }}> <img src="/qalam.png" alt="" /> {record.lastName}</a>
+        <a style={{ marginRight: 16 }}> <img src="/qalam.png" alt="" /> {record.lastname  }</a>
         <a><img src="/delete.png" alt="" /></a>
       </span>
     ),
@@ -101,7 +101,7 @@ const Products = () => {
       unitPrice: "$1.50",
       supplier: 'PepsiCo',
       stocks: 150,
-      status: ['cool', 'teacher'],
+      // status: ['cool', 'teacher'],
     },
     {
       key: '8',
@@ -110,9 +110,7 @@ const Products = () => {
       unitPrice: "$1.50",
       supplier: 'PepsiCo',
       stocks: 150,
-      status: ['cool', 'teacher'],
-      type: 'Moderator',
-      expireTime: 'in 1 month',
+     
     },
   ]);
   const [searchText, setSearchText] = useState('');
@@ -121,15 +119,18 @@ const Products = () => {
   const [form] = Form.useForm();
 
   const filteredData = data.filter(item =>
-    (item.name && item.name.toLowerCase().includes(searchText.toLowerCase())) &&
-    (filterTag === '' || (item.status && item.status.includes(filterTag)))
+    (item.productName && item.productName.toLowerCase().includes(searchText.toLowerCase())) &&
+    (filterTag === '' || (item.productType && item.productType.includes(filterTag)))
   );
 
   const handleAdd = (values) => {
     const newMember = {
       key: (data.length + 1).toString(),
-      name: `${values.firstName} ${values.lastName}`,
-      phoneNumber: values.phoneNumber,
+      productType: `${values.productType}`,
+      productName: `${values.productName}`,
+      unitPrice: values.unitPrice,
+      supplier: values.supplier,
+      stocks: values.stocks,
       status: values.tags || [],
       type: values.type,
       expireTime: values.expireTime,
@@ -161,11 +162,10 @@ const Products = () => {
         >
           
           <Option value="">All <img src="/filter.png" alt="" /></Option>
-          <Option value="nice">Nice</Option>
-          <Option value="developer">Developer</Option>
-          <Option value="loser">Loser</Option>
-          <Option value="cool">Cool</Option>
-          <Option value="teacher">Teacher</Option>
+          <Option value="Drinks">Drinks</Option>
+          <Option value="Clothes">Clothes</Option>
+          <Option value="Supplements">Supplements</Option>
+          <Option value="Food">Food</Option>
         </Select>
         <Button type="primary" onClick={() => setDrawerVisible(true)}> <img src="/pilus.png" alt="" /> Add New</Button>
         </div>
@@ -186,9 +186,37 @@ const Products = () => {
           onFinish={handleAdd}
         >
           <Form.Item
-            name="firstName"
-            label=" Name"
-            rules={[{ required: true, message: 'Please enter Name' }]}
+            name="productType"
+            label=" Product Type"
+            rules={[{ required: true, message: 'Please enter Product Type' }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name="productName"
+            label="Product Name"
+            rules={[{ required: true, message: 'Please enter Product Name' }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name="unitPrice"
+            label="Unit Price"
+            rules={[{ required: true, message: 'Please enter Unit Price' }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name="supplier"
+            label="Supplier"
+            rules={[{ required: true, message: 'Please enter Supplier' }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name="stocks"
+            label="Stocks"
+            rules={[{ required: true, message: 'Please enter Stocks' }]}
           >
             <Input />
           </Form.Item>

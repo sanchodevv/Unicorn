@@ -1,8 +1,184 @@
+import React, { useState } from 'react';
+import { Table, Tag, Button, Input, Select, Modal, Form, Drawer } from "antd";
+import "./garbrandt.css"
+
+const { Option } = Select;
+
+const columns = [
+  {
+    title: 'Membership Type',
+    dataIndex: 'membershipType',
+    key: 'membershipType',
+  },
+  {
+    title: 'Term',
+    dataIndex: 'term',
+    key: 'term',
+  },
+  {
+      title: 'Start Date',
+      dataIndex: 'startTime',
+      key: 'startTime',
+    },
+    {
+        title: 'End Date',
+        dataIndex: 'endDate',
+        key: 'endDate',
+    },
+    {
+      title: 'Status',
+      dataIndex: 'status',
+      key: 'status',
+      render: status => (
+        <>
+          {status.map(tag => {
+            let color = tag.length > 5 ? '#369B46' : '#369B46';
+            if (tag === 'ON HOLD') {
+              color = '#949494';
+            }
+            return (
+              <Tag color={color} key={tag}>
+                {tag.toUpperCase()}
+              </Tag>
+            );
+          })}
+        </>
+      ),
+    },
+  {
+    title: 'Action',
+    key: 'action',
+    render: (_, record) => (
+      <span>
+        <a onClick={() => setDrawerVisible(true)} style={{ marginRight: 16 }}> <img src="/qalam.png" alt="" /> {record.lastName}</a>
+        <a><img src="/delete.png" alt="" /></a>
+      </span>
+    ),
+  },
+];
+
 const Garbrandt = () => {
-    return (
-        <div>
-            <h2>Gar Brandt Page</h2>
+  const [data, setData] = useState([
+    {
+      key: '1',
+        membershipType: 'Standart',
+        term: '1 Month',
+        startDate: 'February 22, 2023',
+        endDate: 'March 22, 2023',
+        status: ['active'],
+    },
+    {
+      key: '2',
+      membershipType: 'Premium',
+      term: '3 Months',
+      startDate: 'January 15, 2023',
+      endDate: 'April 15, 2023',
+      status: ['ON HOLD'],
+    },
+    {
+      key: '3',
+        membershipType: 'VIP',
+        term: '6 Months',
+        startDate: 'December 1, 2022',
+        endDate: 'June 1, 2023',
+        status: ['ON HOLD'],
+    },
+   
+  ]);
+
+ 
+  const [drawerVisible, setDrawerVisible] = useState(false);
+  const [form] = Form.useForm();
+
+ 
+
+  const handleAdd = (values) => {
+    const newMember = {
+      key: (data.length + 1).toString(),
+      membershipType: values.membershipType,
+      term: values.term,
+      startDate: values.startDate,
+      endDate: values.endDate,
+      status: values.status || [],
+    };
+    setData([...data, newMember]);
+    setDrawerVisible(false);
+    form.resetFields();
+  };
+
+  return (
+    <div >
+      <div className ='uno' style={{ marginBottom: 16 }}>
+        <div className="sle">
+          
+        <Button type="primary" className='add1' onClick={() => setDrawerVisible(true)}> <img src="/pilus.png" alt="" /> Add Membership</Button>
         </div>
-    );
-}
+      </div>
+      <h3 className='h3'>CODY GARBRANDT</h3>
+      <h3 className='h4'>MEMBERSHIPS <span>Active</span></h3>
+      <div className="members-table-wrapper">
+        <Table columns={columns} dataSource={data} className="members-table" />
+      </div>
+      <Drawer
+        title="Add New Member"
+        placement="right"
+        onClose={() => setDrawerVisible(false)}
+        open={drawerVisible}
+        size={400}
+      >
+        <Form
+          form={form}
+          layout="vertical"
+          onFinish={handleAdd}
+        >
+          <Form.Item
+            name="membershipType"
+            label="Membership Type"
+            rules={[{ required: true, message: 'Please enter membership type' }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name="term"
+            label="Term"
+            rules={[{ required: true, message: 'Please enter term' }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name="startDate"
+            label="Start Date"
+            rules={[{ required: true, message: 'Please enter start date' }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name="endDate"
+            label="End Date"
+            rules={[{ required: true, message: 'Please enter end date' }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name="status"
+            label="Status"
+            rules={[{ required: true, message: 'Please select status' }]}
+          >
+            <Select placeholder="Select type">
+              <Option value="Admin">Active</Option>
+              <Option value="User">ON HOLD</Option>
+              
+            </Select>
+          </Form.Item>
+          <Form.Item>
+            <Button type="primary" htmlType="submit">
+              Add Member
+            </Button>
+          </Form.Item>
+        </Form>
+      </Drawer>
+    </div>
+  );
+};
+
 export default Garbrandt;

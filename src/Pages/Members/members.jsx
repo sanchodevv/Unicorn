@@ -50,8 +50,11 @@ const columns = [
     key: 'action',
     render: (_, record) => (
       <span>
+        <div className="loq">
+          <a> <img src="/log-out.png" alt="" /></a>
         <a style={{ marginRight: 16 }}> <img src="/qalam.png" alt="" /> {record.lastName}</a>
         <a><img src="/delete.png" alt="" /></a>
+        </div>
       </span>
     ),
   },

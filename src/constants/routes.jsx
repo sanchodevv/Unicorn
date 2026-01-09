@@ -1,5 +1,6 @@
 import Home from "../Pages/Home/home"
 import Invertory from "../Pages/Invertory/invertory";
+import Garbrandt from "../Pages/Members/garBrandt/garbrandt";
 import { default as MemberComponent } from "../Pages/Members/members";
 import Membership from "../Pages/Members/Membership/membership";
 import Payments from "../Pages/Payments/payments";
@@ -53,7 +54,7 @@ export const routes = [
     {
         key: 8,
         path: "/garbrandt",
-        element: Membership
+        element: Garbrandt
     }
     
 

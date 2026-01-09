@@ -12,6 +12,15 @@ const Aside = () => {
         setIsMembershipOpen(!isMembershipOpen);
         navigate('/members');
     };
+    const [isGarBrandtOpen, setIsGarBrandtOpen] = useState(false);
+    const navigates = useNavigate();
+
+    const handleGarBrandtClick = (e) => {
+        e.preventDefault();
+        setIsGarBrandtOpen(!isGarBrandtOpen);
+        navigates('/garbrandt');
+    };
+    
 
     return <aside>
         <div className="aside-logo">
@@ -25,6 +34,11 @@ const Aside = () => {
                             <img src={route.img} alt={route.name} />
                             {route.name}
                             <span className={`arrow ${isMembershipOpen ? 'rotated' : ''}`}>▼</span>
+                        </a>,
+                        <a className='link' onClick={handleMembersClick}>
+                            <img src={route.img} alt={route.name} />
+                            {route.name}
+                            <span className={`arrow ${isGarBrandtOpen ? 'rotated' : ''}`}>▼</span>
                         </a>
                     ) : (
                         <Link className='link' to={route.path}>
@@ -41,6 +55,15 @@ const Aside = () => {
                             
                         </div>
                     )}
+                    {route.name === "Members" && (
+                        <div className={`garbrandt-submenu ${isGarBrandtOpen ? 'open' : ''}`}>
+                            <Link className='link' to="/garbrandt">
+                                <img src="./public/members.png" alt="Garbrandt" />
+                                Garbrandt
+                            </Link>
+                            
+                        </div>
+                    )}
                 </div>
             ))}
         </div>
@@ -51,5 +74,5 @@ const Aside = () => {
                 Logout
         </div>
     </aside>;
-}
+};
 export default Aside;

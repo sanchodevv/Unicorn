@@ -59,7 +59,24 @@ h3{
     border-radius: 20px !important;
 }
 .ant-table-pagination{
-    display: none !important;
+    /* display: none !important; */
+    background-color: #272A30 !important;
+    padding-top: 36px !important;
+}
+.ant-pagination-item-link{
+    background-color: #272A30 !important;
+    border: 1px solid white !important;
+    border-radius: 50px !important;
+    color: white !important;
+}
+.ant-pagination-item{
+    background-color: #9B74F0 !important;
+    border: 1px solid white !important;
+    border-radius: 50px !important;
+    color: white !important;
+}
+.ant-pagination-item a{
+    color: white !important;
 }
 .membership-table {
     margin-right: 200px !important;
