@@ -1,40 +1,30 @@
 import React, { useState } from 'react';
-import { Table, Tag, Button, Input, Select, Modal, Form } from "antd";
+import { Table, Tag, Button, Input, Select, Modal, Form, Drawer } from "antd";
 import "./members.css"
 
 const { Option } = Select;
 
 const columns = [
   {
-    title: 'First Name',
-    dataIndex: 'firstName',
-    key: 'firstName',
+    title: 'Name',
+    dataIndex: 'name',
+    key: 'name',
   },
   {
-    title: 'Last Name',
-    dataIndex: 'lastName',
-    key: 'lastName',
+    title: 'Phone Number',
+    dataIndex: 'phoneNumber',
+    key: 'phoneNumber',
   },
   {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age',
-  },
-  {
-    title: 'Address',
-    dataIndex: 'address',
-    key: 'address',
-  },
-  {
-    title: 'Tags',
-    dataIndex: 'tags',
-    key: 'tags',
-    render: tags => (
+    title: 'Status',
+    dataIndex: 'status',
+    key: 'status',
+    render: status => (
       <>
-        {tags.map(tag => {
+        {status.map(tag => {
           let color = tag.length > 5 ? 'blue' : 'green';
           if (tag === 'loser') {
-            color = 'volcano';
+            color = 'red';
           }
           return (
             <Tag color={color} key={tag}>
@@ -46,12 +36,22 @@ const columns = [
     ),
   },
   {
+    title: 'Type',
+    dataIndex: 'type',
+    key: 'type',
+  },
+  {
+    title: 'Expire Time',
+    dataIndex: 'expireTime',
+    key: 'expireTime',
+  },
+  {
     title: 'Action',
     key: 'action',
     render: (_, record) => (
       <span>
-        <a style={{ marginRight: 16 }}>Invite {record.lastName}</a>
-        <a>Delete</a>
+        <a style={{ marginRight: 16 }}> <img src="/qalam.png" alt="" /> {record.lastName}</a>
+        <a><img src="/delete.png" alt="" /></a>
       </span>
     ),
   },
@@ -61,47 +61,82 @@ const Members = () => {
   const [data, setData] = useState([
     {
       key: '1',
-      firstName: 'John',
-      lastName: 'Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park',
-      tags: ['nice', 'developer'],
+      name: 'John Brown',
+      phoneNumber: '123-456-7890',
+      status: ['nice', 'developer'],
+      type: 'Admin',
+      expireTime: 'in 3 month',
     },
     {
       key: '2',
-      firstName: 'Jim',
-      lastName: 'Green',
-      age: 42,
-      address: 'London No. 1 Lake Park',
-      tags: ['loser'],
+      name: 'Jim Green',
+      phoneNumber: '123-456-7890',
+      status: ['loser'],
+      type: 'User',
+      expireTime: 'in 2 month',
     },
     {
       key: '3',
-      firstName: 'Joe',
-      lastName: 'Black',
-      age: 32,
-      address: 'Sydney No. 1 Lake Park',
-      tags: ['cool', 'teacher'],
+      name: 'Joe Black',
+      phoneNumber: '123-456-7890',
+      status: ['cool', 'teacher'],
+      type: 'Moderator',
+      expireTime: 'in 1 month',
+    },
+    {
+      key: '4',
+      name: 'Joe Black',
+      phoneNumber: '123-456-7890',
+      status: ['cool', 'teacher'],
+      type: 'Moderator',
+      expireTime: 'in 1 month',
+    },
+    {
+      key: '5',
+      name: 'Joe Black',
+      phoneNumber: '123-456-7890',
+      status: ['cool', 'teacher'],
+      type: 'Moderator',
+      expireTime: 'in 1 month',
+    },
+    {
+      key: '6',
+      name: 'Joe Black',
+      phoneNumber: '123-456-7890',
+      status: ['cool', 'teacher'],
+      type: 'Moderator',
+      expireTime: 'in 1 month',
+    },
+    {
+      key: '7',
+      name: 'Joe Black',
+      phoneNumber: '123-456-7890',
+      status: ['cool', 'teacher'],
+      type: 'Moderator',
+      expireTime: 'in 1 month',
     },
   ]);
   const [searchText, setSearchText] = useState('');
   const [filterTag, setFilterTag] = useState('');
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [drawerVisible, setDrawerVisible] = useState(false);
   const [form] = Form.useForm();
 
   const filteredData = data.filter(item =>
-    (item.firstName.toLowerCase().includes(searchText.toLowerCase()) ||
-     item.lastName.toLowerCase().includes(searchText.toLowerCase())) &&
-    (filterTag === '' || item.tags.includes(filterTag))
+    (item.name && item.name.toLowerCase().includes(searchText.toLowerCase())) &&
+    (filterTag === '' || (item.status && item.status.includes(filterTag)))
   );
 
   const handleAdd = (values) => {
     const newMember = {
       key: (data.length + 1).toString(),
-      ...values,
+      name: `${values.firstName} ${values.lastName}`,
+      phoneNumber: values.phoneNumber,
+      status: values.tags || [],
+      type: values.type,
+      expireTime: values.expireTime,
     };
     setData([...data, newMember]);
-    setIsModalVisible(false);
+    setDrawerVisible(false);
     form.resetFields();
   };
 
@@ -109,6 +144,8 @@ const Members = () => {
     <div >
       <div className ='uno' style={{ marginBottom: 16 }}>
         <div  className="inp">
+
+          <img src="/search.png" alt="" />
           <Input
           placeholder="Search by name"
           value={searchText}
@@ -123,22 +160,26 @@ const Members = () => {
           onChange={setFilterTag}
           style={{ width: 126, marginRight: 16 }}
         >
-          <Option value="">All</Option>
+          
+          <Option value="">All <img src="/filter.png" alt="" /></Option>
           <Option value="nice">Nice</Option>
           <Option value="developer">Developer</Option>
           <Option value="loser">Loser</Option>
           <Option value="cool">Cool</Option>
           <Option value="teacher">Teacher</Option>
         </Select>
-        <Button type="primary" onClick={() => setIsModalVisible(true)}>Add New</Button>
+        <Button type="primary" onClick={() => setDrawerVisible(true)}> <img src="/pilus.png" alt="" /> Add New</Button>
         </div>
       </div>
-      <Table columns={columns} dataSource={filteredData} />
-      <Modal
+      <div className="members-table-wrapper">
+        <Table columns={columns} dataSource={filteredData} className="members-table" />
+      </div>
+      <Drawer
         title="Add New Member"
-        open={isModalVisible}
-        onCancel={() => setIsModalVisible(false)}
-        footer={null}
+        placement="right"
+        onClose={() => setDrawerVisible(false)}
+        open={drawerVisible}
+        size={400}
       >
         <Form
           form={form}
@@ -147,29 +188,47 @@ const Members = () => {
         >
           <Form.Item
             name="firstName"
-            label="First Name"
-            rules={[{ required: true, message: 'Please enter first name' }]}
+            label=" Name"
+            rules={[{ required: true, message: 'Please enter Name' }]}
           >
             <Input />
           </Form.Item>
           <Form.Item
-            name="lastName"
-            label="Last Name"
-            rules={[{ required: true, message: 'Please enter last name' }]}
+            name="phoneNumber"
+            label="Phone Number"
+            rules={[{ required: true, message: 'Please enter phone number' }]}
           >
             <Input />
           </Form.Item>
           <Form.Item
-            name="age"
-            label="Age"
-            rules={[{ required: true, message: 'Please enter age' }]}
+            name="status"
+            label="Status"
+            rules={[{ required: true, message: 'Please enter status' }]}
           >
             <Input />
           </Form.Item>
           <Form.Item
-            name="address"
-            label="Address"
-            rules={[{ required: true, message: 'Please enter address' }]}
+            name="type"
+            label="Type"
+            rules={[{ required: true, message: 'Please select type' }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name="type"
+            label="Type"
+            rules={[{ required: true, message: 'Please select type' }]}
+          >
+            <Select placeholder="Select type">
+              <Option value="Admin">Admin</Option>
+              <Option value="User">User</Option>
+              <Option value="Moderator">Moderator</Option>
+            </Select>
+          </Form.Item>
+          <Form.Item
+            name="expireTime"
+            label="Expire Time"
+            rules={[{ required: true, message: 'Please enter expire time' }]}
           >
             <Input />
           </Form.Item>
@@ -191,7 +250,7 @@ const Members = () => {
             </Button>
           </Form.Item>
         </Form>
-      </Modal>
+      </Drawer>
     </div>
   );
 };

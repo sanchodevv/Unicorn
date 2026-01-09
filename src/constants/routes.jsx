@@ -49,6 +49,11 @@ export const routes = [
         key: 7,
         path: "/membership",
         element: Membership
+    },
+    {
+        key: 8,
+        path: "/garbrandt",
+        element: Membership
     }
     
 

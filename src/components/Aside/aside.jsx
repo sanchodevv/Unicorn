@@ -38,6 +38,7 @@ const Aside = () => {
                                 <img src="./public/members.png" alt="Membership" />
                                 Membership
                             </Link>
+                            
                         </div>
                     )}
                 </div>

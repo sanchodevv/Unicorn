@@ -1,6 +1,6 @@
-.ant-spin-container{
+.members-table-wrapper .ant-spin-container{
     background: #343743;
-    margin-top: 164px;
+    margin-top: 26px;
     margin-left: 60px;
     border-radius: 20px;
 }
@@ -9,20 +9,57 @@
 }
 .ant-table-cell{
     background: #343743;
-    border: none;
+    border: none !important;
+    color: #fff !important;
+
 }
 .inp{
     margin-left: 64px;
-    max-width: 424px;
+    max-width: 424px !important;
     height: 44px;
-    color: aliceblue;
+    border-radius: 20px;
+    background-color: #343743;
+    display: flex;
+    
+}
+.inp img{
+    margin-left: 16px;
+    margin-block: 14px;
+    margin-right: 8px;
 }
 .inp input{
+    color: #CCB9F5 !important;
     padding:  14px 275px 14px 16px;
     /* height: 44px; */
     border-radius: 20px;
     border: none;
     background: #343743;
+}
+.inp input :hover {
+    background-color: #343743;
+}
+.ant-table-row:active .ant-table-cell, .ant-table-row:hover .ant-table-cell {
+    background-color: #444858 !important;
+    color: white !important;
+}
+.ant-select{
+    background-color: #343743;
+    border: none;
+    width: 126px !important;
+    height: 44px !important;
+    border-radius: 20px !important;
+}
+.ant-select-input{
+    background-color: #343743 !important;
+    border: none;
+    color: white !important;
+}
+.ant-select-item{
+    background-color: #343743;
+}
+.ant-select-item:hover{
+    background-color: #605DEC;
+    color: white;
 }
 .sle{
     width: 100xx;   
@@ -44,8 +81,23 @@
 }
 .ant-table-cell{
     background-color: #343743 !important;
+    border: none;
 }
 .ant-tablet{
     background-color: #343743 !important;
     border: 1px solid #343743 !important;            
+}
+td{
+    list-style: none;
+    border: none;
+}
+.ant-btn{
+    background-color: #343743;
+    padding: 20px;
+    /* pad-top: 10px; */
+}
+.ant-btn:hover{
+    background-color: #605DEC;
+    border: none;
+    color: white;
 }

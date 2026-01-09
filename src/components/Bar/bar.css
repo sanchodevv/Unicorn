@@ -1,10 +1,15 @@
 /* .css-13cymwt-control */
 .css-13cymwt-control {
-    background-color: var(--sidebar-1);
-    border: none;
+    background-color: var(--sidebar-1) !important;
+    border: none !important;
     /* height: 40px; */
     color: white;
 
+}
+.css-13cymwt-control:focus{
+    background-color: var(--sidebar-1) !important;
+    border: none !important;
+    /* height: 40px; */
 }
 .css-1xc3v61-indicatorContainer{
     display: none;
