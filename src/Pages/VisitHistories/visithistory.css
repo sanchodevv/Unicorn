@@ -4,3 +4,14 @@
 .h3{
     margin: 26px 0 0 60px;  
 }
+.anticon:nth-child(1) {
+    /* display: none; */
+    /* color: #343743 !important; */
+}
+.ant-input:hover{
+    background: none;
+}
+.ant-select-item-option-content:hover{
+    /* background:  none; */
+    color:black;
+}

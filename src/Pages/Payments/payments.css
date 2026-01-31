@@ -4,3 +4,16 @@
 .h3 span{
     color: #369B46;
 }
+.ant-select-content-value {
+    color: white !important;
+    /* display: none; */
+    display: flex;
+    align-items: center;
+    margin-left: 15px;
+    gap: 10px;
+}
+.ant-select-input {
+    background-color: #343743 !important;
+    border: none;
+    color: white !important;
+}

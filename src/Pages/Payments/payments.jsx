@@ -112,6 +112,87 @@ const Payments = () => {
         term: '6 Months',
         paidBy: 'Frank Green',
     },
+    {
+      key: '8',
+        createdDate: 'December 31, 2022 16:40',
+        total: '$400',
+        paymentMethod: 'Checks',
+        type: 'Standard',
+        term: '6 Months',
+        paidBy: 'Frank Green',
+    },
+    {
+      key: '9',
+        createdDate: 'December 31, 2022 16:40',
+        total: '$400',
+        paymentMethod: 'Checks',
+        type: 'Standard',
+        term: '6 Months',
+        paidBy: 'Frank Green',
+    },
+    {
+      key: '10',
+        createdDate: 'December 31, 2022 16:40',
+        total: '$400',
+        paymentMethod: 'Checks',
+        type: 'Standard',
+        term: '6 Months',
+        paidBy: 'Frank Green',
+    },
+    {
+      key: '11',
+        createdDate: 'December 31, 2022 16:40',
+        total: '$400',
+        paymentMethod: 'Checks',
+        type: 'Standard',
+        term: '6 Months',
+        paidBy: 'Frank Green',
+    },
+    {
+      key: '12',
+        createdDate: 'December 31, 2022 16:40',
+        total: '$400',
+        paymentMethod: 'Checks',
+        type: 'Standard',
+        term: '6 Months',
+        paidBy: 'Frank Green',
+    },
+    {
+      key: '13',
+        createdDate: 'December 31, 2022 16:40',
+        total: '$400',
+        paymentMethod: 'Checks',
+        type: 'Standard',
+        term: '6 Months',
+        paidBy: 'Frank Green',
+    },
+    {
+      key: '14',
+        createdDate: 'December 31, 2022 16:40',
+        total: '$400',
+        paymentMethod: 'Checks',
+        type: 'Standard',
+        term: '6 Months',
+        paidBy: 'Frank Green',
+    },
+    {
+      key: '15',
+        createdDate: 'December 31, 2022 16:40',
+        total: '$400',
+        paymentMethod: 'Checks',
+        type: 'Standard',
+        term: '6 Months',
+        paidBy: 'Frank Green',
+    },
+    {
+      key: '16',
+        createdDate: 'December 31, 2022 16:40',
+        total: '$400',
+        paymentMethod: 'Checks',
+        type: 'Standard',
+        term: '6 Months',
+        paidBy: 'Frank Green',
+    },
   ]);
   const [searchText, setSearchText] = useState('');
   const [filterTag, setFilterTag] = useState('');
@@ -122,6 +203,7 @@ const Payments = () => {
     (item.paidBy && item.paidBy.toLowerCase().includes(searchText.toLowerCase())) &&
     (filterTag === '' || (item.type && item.type.includes(filterTag)))
   );
+  const [currentPage, setCurrentPage] = useState(1);
 
  
 
@@ -146,7 +228,7 @@ const Payments = () => {
           style={{ width: 126, marginRight: 16 }}
         >
           
-          <Option value="">All <img src="/filter.png" alt="" /></Option>
+          <Option value=""> <img src="/filter.png" alt="" /> Filter</Option>
           <Option value="standart">Standart</Option>
           <Option value="vip">Vip</Option>
           <Option value="bussinues">Bussinues</Option>
@@ -156,7 +238,14 @@ const Payments = () => {
       </div>
       <h3 className='h3'>Total Amount of all payments: <span>$12,293.00</span></h3>
       <div className="members-table-wrapper">
-        <Table columns={columns} dataSource={filteredData} className="payments-table" />
+        <Table columns={columns} dataSource={filteredData} 
+        pagination={{
+        current: currentPage,
+        pageSize: 7,
+        total: data.length,
+        onChange: (page) => setCurrentPage(page),
+        }}
+        className="payments-table" />
       </div>
      
     </div>

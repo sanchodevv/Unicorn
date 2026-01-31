@@ -62,11 +62,15 @@ const Membership = () => {
     return (
         <>
             <h3>Membership Types</h3>
-            <Button type="primary" onClick={() => setDrawerVisible(true)} className="add" style={{ marginBottom: 16, background: '#343743', border: 'none' }}>
+            <Button type="primary" onClick={() => setDrawerVisible(true)} className="add" style={{ marginBottom: 16, background: '#343743/', border: 'none' }}>
               <img src="/pilus.png" alt="" />  Add New</Button>
             
             <div className="membership-table-wrapper">
-                <Table columns={columns} dataSource={dataSource} className="membership-table" />
+                <Table columns={columns} dataSource={dataSource} 
+                 pagination={{
+          style: { display: 'none' },
+        }}
+                className="membership-table" />
             </div>
 
             <Drawer

@@ -1,0 +1,165 @@
+.card{
+    background-color: #343743;
+    width: 245px;
+    height: 295px;
+    margin-top: 164px;
+    margin-left: 60px;
+    border-radius: 20px;
+}
+.card img{
+    width: 225px;
+    height: 131px;
+    background-color: #272A30;
+    margin: 10px;
+    border-radius: 20px;
+}
+.card button{
+    width: 225px;
+    height: 35px;
+    background-color: #272A30;
+    display: flex;
+    align-items: center;
+    
+    border-radius: 20px;
+    color: white;
+    border: none;
+    transition: all 0.3s ease;
+    margin-left: 10px;
+}
+.card button img{
+    margin-left: 55px;
+    width: 24px;
+    height: 24px;
+}
+.card button:hover{
+    background-color: #272A30;
+    margin-top: 23px;
+    cursor: pointer;
+}
+.card h2{
+    color: white;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    /* max-width: 103px; */
+    font-size: 16px;
+    line-height: 100%;
+    font-weight: 700;
+}
+.card p{
+    /* color: #FFFFFF; */
+    /* opacity: 0.6; */
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: 14px;
+    line-height: 100%;
+    font-weight: 400;
+}
+.card p:nth-child(3){
+    margin-bottom: 13px;
+}
+.cards{
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -480px;
+
+
+}
+.inp{
+    margin-top: 94px;
+}
+.sav{
+    position: absolute;
+    top: 30px;
+    right: 20px;
+    /* background-color: #343743 !important; */
+}
+.cart-btn{
+    /* width: 100px; */
+    /* height: 40px; */
+    background-color: #272A30;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+}
+/* gpt */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.4);
+}
+
+.sale-panel {
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100vh;
+  width: 350px;
+  background: #2f3342;
+  color: white;
+  padding: 15px;
+  animation: slide .3s ease;
+  overflow-y: auto;
+}
+
+@keyframes slide {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+.sale-item {
+  display: flex;
+  gap: 10px;
+  background: #3a3f52;
+  padding: 10px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+
+.sale-item img {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+}
+
+.info {
+  flex: 1;
+}
+
+.qty {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.qty button {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: none;
+  font-weight: bold;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+  margin: 15px 0;
+}
+
+.pay-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 25px;
+  background: #9b7cff;
+  border: none;
+  color: white;
+  font-size: 16px;
+}

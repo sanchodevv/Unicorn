@@ -22,8 +22,8 @@ const columns = [
     render: status => (
       <>
         {status.map(tag => {
-          let color = tag.length > 5 ? 'blue' : 'green';
-          if (tag === 'loser') {
+          let color = tag.length > 5 ? 'green' : 'green';
+          if (tag === 'OUT OF STACK') {
             color = 'red';
           }
           return (
@@ -52,7 +52,7 @@ const columns = [
       <span>
         <div className="loq">
           <a> <img src="/log-out.png" alt="" /></a>
-        <a style={{ marginRight: 16 }}> <img src="/qalam.png" alt="" /> {record.lastName}</a>
+        <a  onClick={() => setDrawerVisible(true)} style={{ marginRight: 16 }}>  <img src="/qalam.png" alt="" /> {record.lastName}</a>
         <a><img src="/delete.png" alt="" /></a>
         </div>
       </span>
@@ -66,7 +66,7 @@ const Members = () => {
       key: '1',
       name: 'John Brown',
       phoneNumber: '123-456-7890',
-      status: ['nice', 'developer'],
+      status: ['AVAILABLE'],
       type: 'Admin',
       expireTime: 'in 3 month',
     },
@@ -74,7 +74,7 @@ const Members = () => {
       key: '2',
       name: 'Jim Green',
       phoneNumber: '123-456-7890',
-      status: ['loser'],
+      status: ['OUT OF STACK'],
       type: 'User',
       expireTime: 'in 2 month',
     },
@@ -82,7 +82,7 @@ const Members = () => {
       key: '3',
       name: 'Joe Black',
       phoneNumber: '123-456-7890',
-      status: ['cool', 'teacher'],
+      status: ['AVAILABLE'],
       type: 'Moderator',
       expireTime: 'in 1 month',
     },
@@ -90,7 +90,7 @@ const Members = () => {
       key: '4',
       name: 'Joe Black',
       phoneNumber: '123-456-7890',
-      status: ['cool', 'teacher'],
+      status: ['AVAILABLE'],
       type: 'Moderator',
       expireTime: 'in 1 month',
     },
@@ -98,7 +98,7 @@ const Members = () => {
       key: '5',
       name: 'Joe Black',
       phoneNumber: '123-456-7890',
-      status: ['cool', 'teacher'],
+      status: ['AVAILABLE'],
       type: 'Moderator',
       expireTime: 'in 1 month',
     },
@@ -106,7 +106,7 @@ const Members = () => {
       key: '6',
       name: 'Joe Black',
       phoneNumber: '123-456-7890',
-      status: ['cool', 'teacher'],
+      status: ['AVAILABLE'],
       type: 'Moderator',
       expireTime: 'in 1 month',
     },
@@ -114,7 +114,79 @@ const Members = () => {
       key: '7',
       name: 'Joe Black',
       phoneNumber: '123-456-7890',
-      status: ['cool', 'teacher'],
+      status: ['AVAILABLE'],
+      type: 'Moderator',
+      expireTime: 'in 1 month',
+    },
+    {
+      key: '8',
+      name: 'Leo Messi',
+      phoneNumber: '123-456-7890',
+      status: ['OUT OF STACK'],
+      type: 'Moderator',
+      expireTime: 'in 4 month',
+    },
+    {
+      key: '9',
+      name: 'John Doe',
+      phoneNumber: '123-456-7890',
+      status: ['AVAILABLE'],
+      type: 'Moderator',
+      expireTime: 'in 2 month',
+    },
+    {
+      key: '10',
+      name: 'Joed Blacks',
+      phoneNumber: '123-456-7890',
+      status: ['AVAILABLE'],
+      type: 'Moderator',
+      expireTime: 'in 6 month',
+    },
+    {
+      key: '11',
+      name: 'Ismoil Rx',
+      phoneNumber: '123-456-7890',
+      status: ['OUT OF STACK'],
+      type: 'Moderator',
+      expireTime: 'in 2 month',
+    },
+    {
+      key: '12',
+      name: 'Sancho',
+      phoneNumber: '123-456-7890',
+      status: ['AVAILABLE'],
+      type: 'Moderator',
+      expireTime: 'in 8 month',
+    },
+    {
+      key: '13',
+      name: 'Joe Black',
+      phoneNumber: '123-456-7890',
+      status: ['AVAILABLE'],
+      type: 'Moderator',
+      expireTime: 'in 1 month',
+    },
+    {
+      key: '14',
+      name: 'Joe Black',
+      phoneNumber: '123-456-7890',
+      status: ['AVAILABLE'],
+      type: 'Moderator',
+      expireTime: 'in 1 month',
+    },
+    {
+      key: '15',
+      name: 'Joe Black',
+      phoneNumber: '123-456-7890',
+      status: ['AVAILABLE'],
+      type: 'Moderator',
+      expireTime: 'in 1 month',
+    },
+    {
+      key: '16',
+      name: 'Joe Black',
+      phoneNumber: '123-456-7890',
+      status: ['AVAILABLE'],
       type: 'Moderator',
       expireTime: 'in 1 month',
     },
@@ -143,6 +215,8 @@ const Members = () => {
     form.resetFields();
   };
 
+  const [currentPage, setCurrentPage] = useState(1);
+
   return (
     <div >
       <div className ='uno' style={{ marginBottom: 16 }}>
@@ -164,7 +238,7 @@ const Members = () => {
           style={{ width: 126, marginRight: 16 }}
         >
           
-          <Option value="">All <img src="/filter.png" alt="" /></Option>
+          <Option value=""><img src="/filter.png" alt="" /> Filter</Option>
           <Option value="nice">Nice</Option>
           <Option value="developer">Developer</Option>
           <Option value="loser">Loser</Option>
@@ -175,7 +249,14 @@ const Members = () => {
         </div>
       </div>
       <div className="members-table-wrapper">
-        <Table columns={columns} dataSource={filteredData} className="members-table" />
+        <Table columns={columns} dataSource={filteredData} 
+        pagination={{
+        current: currentPage,
+        pageSize: 7,
+        total: data.length,
+        onChange: (page) => setCurrentPage(page),
+  }} 
+  className="members-table" />
       </div>
       <Drawer
         title="Add New Member"

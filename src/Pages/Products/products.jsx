@@ -110,7 +110,86 @@ const Products = () => {
       unitPrice: "$1.50",
       supplier: 'PepsiCo',
       stocks: 150,
-     
+    },
+    {
+      key: '9',
+      productType: 'Drinks',
+      productName: 'Aquafina Bottled Water (0.5L)',
+      unitPrice: "$1.50",
+      supplier: 'PepsiCo',
+      stocks: 150,
+    },
+    {
+      key: '10',
+      productType: 'Drinks',
+      productName: 'Aquafina Bottled Water (0.5L)',
+      unitPrice: "$1.0",
+      supplier: 'PepsiCo',
+      stocks: 150,
+    },
+    {
+      key: '11',
+      productType: 'Drinks',
+      productName: 'Aquafina Bottled Water (0.5L)',
+      unitPrice: "$1.50",
+      supplier: 'PepsiCo',
+      stocks: 150,
+    },
+    {
+      key: '12',
+      productType: 'Drinks',
+      productName: 'Aquafina Bottled Water (0.5L)',
+      unitPrice: "$1.50",
+      supplier: 'PepsiCo',
+      stocks: 150,
+    },
+    {
+      key: '13',
+      productType: 'Drinks',
+      productName: 'Aquafina Bottled Water (0.5L)',
+      unitPrice: "$1.50",
+      supplier: 'PepsiCo',
+      stocks: 150,
+    },
+    {
+      key: '14',
+      productType: 'Drinks',
+      productName: 'Aquafina Bottled Water (0.5L)',
+      unitPrice: "$1.50",
+      supplier: 'PepsiCo',
+      stocks: 150,
+    },
+    {
+      key: '15',
+      productType: 'Snacks',
+      productName: 'Aquafina Bottled Water (0.5L)',
+      unitPrice: "$1.770",
+      supplier: 'PepsiCo',
+      stocks: 150,
+    },
+    {
+      key: '16',
+      productType: 'Drinks',
+      productName: 'Aquafina Bottled Water (0.5L)',
+      unitPrice: "$1.50",
+      supplier: 'PepsiCo',
+      stocks: 150,
+    },
+    {
+      key: '17',
+      productType: 'Foods',
+      productName: 'Aquafina Bottled Water (0.5L)',
+      unitPrice: "$2.50",
+      supplier: 'PepsiCo',
+      stocks: 450,
+    },
+    {
+      key: '18',
+      productType: 'Drinks',
+      productName: 'Aquafina Bottled Water (0.5L)',
+      unitPrice: "$1.50",
+      supplier: 'PepsiCo',
+      stocks: 150,
     },
   ]);
   const [searchText, setSearchText] = useState('');
@@ -139,6 +218,7 @@ const Products = () => {
     setDrawerVisible(false);
     form.resetFields();
   };
+   const [currentPage, setCurrentPage] = useState(1);
 
   return (
     <div >
@@ -160,8 +240,7 @@ const Products = () => {
           onChange={setFilterTag}
           style={{ width: 126, marginRight: 16 }}
         >
-          
-          <Option value="">All <img src="/filter.png" alt="" /></Option>
+          <Option value=""><img src="/filter.png" alt="" /> Filter</Option>
           <Option value="Drinks">Drinks</Option>
           <Option value="Clothes">Clothes</Option>
           <Option value="Supplements">Supplements</Option>
@@ -171,7 +250,14 @@ const Products = () => {
         </div>
       </div>
       <div className="members-table-wrapper">
-        <Table columns={columns} dataSource={filteredData} className="members-table" />
+        <Table columns={columns} dataSource={filteredData} 
+          pagination={{
+          current: currentPage,
+          pageSize: 7,
+          total: data.length,
+          onChange: (page) => setCurrentPage(page),
+  }}
+        className="members-table" />
       </div>
       <Drawer
         title="Add New Member"

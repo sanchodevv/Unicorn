@@ -105,6 +105,78 @@ const Invertory = () => {
       stocks: 200,
       status: ['available'],
     },
+    {
+      key: '8',
+      productType: 'Water',
+      productName: 'Coca Cola (500ml)',
+      supplier: 'PepsiCo',
+      stocks: 200,
+      status: ['available'],
+    },
+    {
+      key: '9',
+      productType: 'Snacks',
+      productName: 'Cheetos Flamin Hot (100g)',
+      supplier: 'PepsiCo',
+      stocks: 200,
+      status: ['out of stock'],
+    },
+    {
+      key: '10',
+      productType: 'Snacks',
+      productName: 'Cheetos Flamin Hot (100g)',
+      supplier: 'PepsiCo',
+      stocks: 200,
+      status: ['available'],
+    },
+    {
+      key: '11',
+      productType: 'Snacks',
+      productName: 'Cheetos Flamin Hot (100g)',
+      supplier: 'PepsiCo',
+      stocks: 200,
+      status: ['available'],
+    },
+    {
+      key: '12',
+      productType: 'Foods',
+      productName: 'Cheetos Flamin Hot (100g)',
+      supplier: 'PepsiCo',
+      stocks: 200,
+      status: ['available'],
+    },
+    {
+      key: '13',
+      productType: 'Snacks',
+      productName: 'Cheetos Flamin Hot (100g)',
+      supplier: 'PepsiCo',
+      stocks: 200,
+      status: ['available'],
+    },
+    {
+      key: '14',
+      productType: 'Snacks',
+      productName: 'Cheetos Flamin Hot (100g)',
+      supplier: 'PepsiCo',
+      stocks: 200,
+      status: ['available'],
+    },
+    {
+      key: '15',
+      productType: 'Snacks',
+      productName: 'Cheetos Flamin Hot (100g)',
+      supplier: 'PepsiCo',
+      stocks: 200,
+      status: ['available'],
+    },
+    {
+      key: '16',
+      productType: 'Snacks',
+      productName: 'Cheetos Flamin Hot (100g)',
+      supplier: 'PepsiCo',
+      stocks: 200,
+      status: ['available'],
+    },
   ]);
   const [searchText, setSearchText] = useState('');
   const [filterTag, setFilterTag] = useState('');
@@ -129,6 +201,7 @@ const Invertory = () => {
     setDrawerVisible(false);
     form.resetFields();
   };
+  const [currentPage, setCurrentPage] = useState(1);
 
   return (
     <div >
@@ -150,7 +223,7 @@ const Invertory = () => {
           style={{ width: 126, marginRight: 16 }}
         >
           
-          <Option value="">All <img src="/filter.png" alt="" /></Option>
+          <Option value=""> <img src="/filter.png" alt="" /> Filter</Option>
           <Option value="available">Available</Option>
           <Option value="out of stock">Out of Stock</Option>
         </Select>
@@ -158,9 +231,16 @@ const Invertory = () => {
         </div>
       </div>
       <div className="members-table-wrapper">
-        <Table columns={columns} dataSource={filteredData} className="members-table" />
+        <Table columns={columns} dataSource={filteredData}
+          pagination={{
+          current: currentPage,
+          pageSize: 7,
+          total: data.length,
+          onChange: (page) => setCurrentPage(page),
+    }}
+        className="members-table" />
       </div>
-      <Drawer
+      <D
         title="Stock In"
         placement="right"
         onClose={() => setDrawerVisible(false)}
@@ -218,7 +298,7 @@ const Invertory = () => {
             </Button>
           </Form.Item>
         </Form>
-      </Drawer>
+      </D>
     </div>
   );
 };

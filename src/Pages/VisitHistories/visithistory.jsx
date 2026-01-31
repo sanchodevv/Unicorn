@@ -68,6 +68,60 @@ const VisitHistory = () => {
         visitTime: '2 weeks ago(at 3:20 PM)',
         visitDate: 'May 29, 2024',
     },
+    {
+      key: '8',
+        memberName: 'William Taylor',
+        visitTime: '2 weeks ago(at 3:20 PM)',
+        visitDate: 'May 29, 2024',
+    },
+    {
+      key: '9',
+        memberName: 'William Taylor',
+        visitTime: '2 weeks ago(at 3:20 PM)',
+        visitDate: 'May 29, 2024',
+    },
+    {
+      key: '10',
+        memberName: 'William Taylor',
+        visitTime: '2 weeks ago(at 3:20 PM)',
+        visitDate: 'May 29, 2024',
+    },
+    {
+      key: '11',
+        memberName: 'William Taylor',
+        visitTime: '2 weeks ago(at 3:20 PM)',
+        visitDate: 'May 29, 2024',
+    },
+    {
+      key: '12',
+        memberName: 'William Taylor',
+        visitTime: '2 weeks ago(at 3:20 PM)',
+        visitDate: 'May 29, 2024',
+    },
+    {
+      key: '13',
+        memberName: 'William Taylor',
+        visitTime: '2 weeks ago(at 3:20 PM)',
+        visitDate: 'May 29, 2024',
+    },
+    {
+      key: '14',
+        memberName: 'William Taylor',
+        visitTime: '2 weeks ago(at 3:20 PM)',
+        visitDate: 'May 29, 2024',
+    },
+    {
+      key: '15',
+        memberName: 'William Taylor',
+        visitTime: '2 weeks ago(at 3:20 PM)',
+        visitDate: 'May 29, 2024',
+    },
+    {
+      key: '16',
+        memberName: 'William Taylor',
+        visitTime: '2 weeks ago(at 3:20 PM)',
+        visitDate: 'May 29, 2024',
+    },
   ]);
   const [searchText, setSearchText] = useState('');
   const [filterTag, setFilterTag] = useState('');
@@ -78,6 +132,7 @@ const VisitHistory = () => {
     (item.memberName && item.memberName.toLowerCase().includes(searchText.toLowerCase())) &&
     (filterTag === '' || (item.visitDate && item.visitDate.includes(filterTag)))
   );
+const [currentPage, setCurrentPage] = useState(1);
 
 
 
@@ -100,8 +155,7 @@ const VisitHistory = () => {
           onChange={setFilterTag}
           style={{ width: 126, marginRight: 16 }}
         >
-          
-          <Option value="">All <img src="/filter.png" alt="" /></Option>
+          <Option value=""><img src="/filter.png" alt="" /> Filter</Option>
           <Option value="2023">2023</Option>
           <Option value="2024">2024</Option>
           <Option value="2025">2025</Option>
@@ -111,7 +165,14 @@ const VisitHistory = () => {
       </div>
       <h3 className='h3'>Total Number of Visitors Today: 0</h3>
       <div className="members-table-wrapper">
-        <Table columns={columns} dataSource={filteredData} className="visit-table" />
+        <Table columns={columns} dataSource={filteredData} 
+        pagination={{
+        current: currentPage,
+        pageSize: 7,
+        total: data.length,
+        onChange: (page) => setCurrentPage(page),
+        }}
+        className="visit-table" />
       </div>
      
     </div>

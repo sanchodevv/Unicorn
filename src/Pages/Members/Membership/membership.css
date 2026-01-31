@@ -10,6 +10,7 @@
 }
 .ant-drawer-section label{
     color: white !important;
+    text-decoration: none !important;
 }
 .ant-select-input{
     background-color: #272A30 !important;
@@ -70,8 +71,14 @@ h3{
     color: white !important;
 }
 .ant-pagination-item{
-    background-color: #9B74F0 !important;
+    background-color: #272A30 !important;
     border: 1px solid white !important;
+    border-radius: 50px !important;
+    color: white !important;
+}
+.ant-pagination-item:focus{
+    background-color: #9B74F0 !important;
+    border: none !important;
     border-radius: 50px !important;
     color: white !important;
 }

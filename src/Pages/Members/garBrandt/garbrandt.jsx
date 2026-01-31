@@ -105,7 +105,7 @@ const Garbrandt = () => {
     setDrawerVisible(false);
     form.resetFields();
   };
-
+  
   return (
     <div >
       <div className ='uno' style={{ marginBottom: 16 }}>
@@ -117,7 +117,11 @@ const Garbrandt = () => {
       <h3 className='h3'>CODY GARBRANDT</h3>
       <h3 className='h4'>MEMBERSHIPS <span>Active</span></h3>
       <div className="members-table-wrapper">
-        <Table columns={columns} dataSource={data} className="members-table" />
+        <Table columns={columns} dataSource={data} 
+        pagination={{
+          style: { display: 'none' },
+        }}
+        className="members-table" />
       </div>
       <Drawer
         title="Add New Member"
