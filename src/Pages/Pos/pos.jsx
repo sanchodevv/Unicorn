@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import "./pos.css";
 import { Input } from "antd";
 
 const Pos = () => {
+    const { t } = useTranslation();
 
     const [cart, setCart] = useState([]);
     const [isCartOpen, setIsCartOpen] = useState(false);
@@ -56,7 +58,7 @@ useEffect(() => {
 
           <img src="/search.png" alt="" />
           <Input
-          placeholder="Search by name"
+          placeholder={t('searchByName')}
           value={searchText}
           onChange={e => setSearchText(e.target.value)}
           style={{ width: 424, marginRight: 16 }}
@@ -67,14 +69,14 @@ useEffect(() => {
     <div className="card" key={product.id}>
       <img src={product.thumbnail} alt={product.title} />
       <h2>{product.title}</h2>
-      <p>Brand: {product.brand}</p>
-      <p>Quality: {product.category}</p>
-      <button><img src="/pos.png" alt="" onClick={() => addToCart(product)} />Add to Cart ({cart.length})</button>
+      <p>{t('brand')}: {product.brand}</p>
+      <p>{t('quality')}: {product.category}</p>
+      <button><img src="/pos.png" alt="" onClick={() => addToCart(product)} />{t('addToCart')} ({cart.length})</button>
     </div>
   ))}
   {isCartOpen && (
   <div className="sale-panel">
-    <h3>SALE SUMMARY</h3>
+    <h3>{t('saleSummary')}</h3>
 
     {cart.map(item => (
       <div key={item.id} className="sale-item">
@@ -82,7 +84,7 @@ useEffect(() => {
 
         <div className="info">
           <b>{item.title}</b>
-          <span>Brand: {item.brand}</span>
+          <span>{t('brand')}: {item.brand}</span>
           <p>${item.price}</p>
         </div>
 
@@ -95,7 +97,7 @@ useEffect(() => {
     ))}
 
     <div className="total">
-      <b>TOTAL:</b> <span>${total.toFixed(2)}</span>
+      <b>{t('total')}:</b> <span>${total.toFixed(2)}</span>
     </div>
 
     <button className="pay-btn">MAKE PAYMENT</button>

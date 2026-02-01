@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import LangSelect from "./select";
 
 const Bar = () => {
     const [isProfileOpen, setIsProfileOpen] = useState(false);
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+    const { t } = useTranslation();
 
     const toggleProfile = () => {
         setIsProfileOpen(!isProfileOpen);
@@ -26,9 +28,9 @@ const Bar = () => {
                     <img src="./public/settings.png" alt="settings" />
                     {isSettingsOpen && (
                         <div className="settings-dropdown">
-                            <p>Settings</p>
-                            <p>Theme: Light</p>
-                            <p>Notifications: On</p>
+                            <p>{t('settings')}</p>
+                            <p>{t('theme')}</p>
+                            <p>{t('notifications')}</p>
                             <button onClick={toggleSettings}>×</button>
                         </div>
                     )}
@@ -37,9 +39,9 @@ const Bar = () => {
                 <img src="./public/profile.png" alt="dd" />
                  {isProfileOpen && (
                     <div className="profile-dropdown">
-                        <p>Profile Information</p>
-                        <p>Name: Sanjar Komilov</p>
-                        <p>Email: sancho@gmail.com</p>
+                        <p>{t('profileInfo')}</p>
+                        <p>{t('name')}</p>
+                        <p>{t('email')}</p>
                         <button onClick={toggleProfile}>×</button>
                     </div>
                 )}

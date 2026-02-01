@@ -1,53 +1,55 @@
 import React, { useState } from 'react';
 import { Table, Tag, Button, Input, Select, Modal, Form, Drawer } from "antd";
+import { useTranslation } from "react-i18next";
 import "./invertory.css"
 
 const { Option } = Select;
 
-const columns = [
-  {
-    title: 'Product Type',
-    dataIndex: 'productType',
-    key: 'productType',
-  },
-  {
-    title: 'Product Name',
-    dataIndex: 'productName',
-    key: 'productName',
-  },
-  {
-      title: 'Supplier',
-      dataIndex: 'supplier',
-      key: 'supplier',
+const Invertory = () => {
+  const { t } = useTranslation();
+  
+  const columns = [
+    {
+      title: t('productType'),
+      dataIndex: 'productType',
+      key: 'productType',
     },
     {
-        title: 'Stocks',
-        dataIndex: 'stocks',
-        key: 'stocks',
+      title: t('productName'),
+      dataIndex: 'productName',
+      key: 'productName',
     },
-{
-  title: 'Status',
-  dataIndex: 'status',
-  key: 'status',
-  render: status => (
-    <>
-      {status.map(tag => {
-        let color = tag.length > 5 ? 'green' : 'green';
-        if (tag === 'out of stock') {
-          color = 'red';
-        }
-        return (
-          <Tag color={color} key={tag}>
-            {tag.toUpperCase()}
-          </Tag>
-        );
-      })}
-    </>
-  ),
+    {
+        title: t('supplier'),
+        dataIndex: 'supplier',
+        key: 'supplier',
+      },
+      {
+          title: t('stocks'),
+          dataIndex: 'stocks',
+          key: 'stocks',
+      },
+  {
+    title: 'Status',
+    dataIndex: 'status',
+    key: 'status',
+    render: status => (
+      <>
+        {status.map(tag => {
+          let color = tag.length > 5 ? 'green' : 'green';
+          if (tag === 'out of stock') {
+            color = 'red';
+          }
+          return (
+            <Tag color={color} key={tag}>
+              {tag.toUpperCase()}
+            </Tag>
+          );
+        })}
+      </>
+    ),
 },
 ];
-
-const Invertory = () => {
   const [data, setData] = useState([
     {
       key: '1',
@@ -240,7 +242,7 @@ const Invertory = () => {
     }}
         className="members-table" />
       </div>
-      <D
+      <Drawer
         title="Stock In"
         placement="right"
         onClose={() => setDrawerVisible(false)}
@@ -298,7 +300,7 @@ const Invertory = () => {
             </Button>
           </Form.Item>
         </Form>
-      </D>
+      </Drawer>
     </div>
   );
 };

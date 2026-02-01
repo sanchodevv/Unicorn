@@ -1,66 +1,68 @@
 import React, { useState } from 'react';
 import { Table, Tag, Button, Input, Select, Modal, Form, Drawer } from "antd";
+import { useTranslation } from "react-i18next";
 import "./members.css"
 
 const { Option } = Select;
 
-const columns = [
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-  },
-  {
-    title: 'Phone Number',
-    dataIndex: 'phoneNumber',
-    key: 'phoneNumber',
-  },
-  {
-    title: 'Status',
-    dataIndex: 'status',
-    key: 'status',
-    render: status => (
-      <>
-        {status.map(tag => {
-          let color = tag.length > 5 ? 'green' : 'green';
-          if (tag === 'OUT OF STACK') {
-            color = 'red';
-          }
-          return (
-            <Tag color={color} key={tag}>
-              {tag.toUpperCase()}
-            </Tag>
-          );
-        })}
-      </>
-    ),
-  },
-  {
-    title: 'Type',
-    dataIndex: 'type',
-    key: 'type',
-  },
-  {
-    title: 'Expire Time',
-    dataIndex: 'expireTime',
-    key: 'expireTime',
-  },
-  {
-    title: 'Action',
-    key: 'action',
-    render: (_, record) => (
-      <span>
-        <div className="loq">
-          <a> <img src="/log-out.png" alt="" /></a>
-        <a  onClick={() => setDrawerVisible(true)} style={{ marginRight: 16 }}>  <img src="/qalam.png" alt="" /> {record.lastName}</a>
-        <a><img src="/delete.png" alt="" /></a>
-        </div>
-      </span>
-    ),
-  },
-];
-
 const Members = () => {
+  const { t } = useTranslation();
+  
+  const columns = [
+    {
+      title: t('name'),
+      dataIndex: 'name',
+      key: 'name',
+    },
+    {
+      title: t('phoneNumber'),
+      dataIndex: 'phoneNumber',
+      key: 'phoneNumber',
+    },
+    {
+      title: 'Status',
+      dataIndex: 'status',
+      key: 'status',
+      render: status => (
+        <>
+          {status.map(tag => {
+            let color = tag.length > 5 ? 'green' : 'green';
+            if (tag === 'OUT OF STACK') {
+              color = 'red';
+            }
+            return (
+              <Tag color={color} key={tag}>
+                {tag.toUpperCase()}
+              </Tag>
+            );
+          })}
+        </>
+      ),
+    },
+    {
+      title: t('type'),
+      dataIndex: 'type',
+      key: 'type',
+    },
+    {
+      title: t('expireTime'),
+      dataIndex: 'expireTime',
+      key: 'expireTime',
+    },
+    {
+      title: 'Action',
+      key: 'action',
+      render: (_, record) => (
+        <span>
+          <div className="loq">
+            <a> <img src="/log-out.png" alt="" /></a>
+          <a  onClick={() => setDrawerVisible(true)} style={{ marginRight: 16 }}>  <img src="/qalam.png" alt="" /> {record.lastName}</a>
+          <a><img src="/delete.png" alt="" /></a>
+          </div>
+        </span>
+      ),
+    },
+  ];
   const [data, setData] = useState([
     {
       key: '1',

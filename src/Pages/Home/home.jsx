@@ -1,10 +1,13 @@
 import "./home.css"
+import { useTranslation } from "react-i18next";
 
 const Home = () => {
+    const { t } = useTranslation();
+    
     return (
         <>
             <div className="home">
-                <h1>ПОЛУЧЕННЫЕ ДЕНЬГИ</h1>
+                <h1>{t("receivedMoney")}</h1>
                 <div className="stats">
                     <img src="./public/stat.png" alt="" />
                 </div>

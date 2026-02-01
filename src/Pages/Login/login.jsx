@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import './login.css';
 
 const Login = ({ setIsLoggedIn }) => {
@@ -7,6 +8,7 @@ const Login = ({ setIsLoggedIn }) => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
+    const { t } = useTranslation();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -15,7 +17,7 @@ const Login = ({ setIsLoggedIn }) => {
             setIsLoggedIn(true);
             navigate('/');
         } else {
-            setError('Noto\'g\'ri login yoki parol');
+            setError(t('invalidCredentials'));
         }
     };
 
@@ -23,9 +25,9 @@ const Login = ({ setIsLoggedIn }) => {
         <div className="login-container">
             <form className="login-form" onSubmit={handleSubmit}>
                 <img src="./public/logo.png" alt="" />
-                <h2>Welcome</h2>
+                <h2>{t('welcome')}</h2>
                 <div className="form-group">
-                    <label htmlFor="username">Login</label>
+                    <label htmlFor="username">{t('loginLabel')}</label>
                     <div className="input">
                         <img src="./public/user.png
                         " alt="" />
@@ -39,7 +41,7 @@ const Login = ({ setIsLoggedIn }) => {
                     </div>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="password">Parol:</label>
+                    <label htmlFor="password">{t('passwordLabel')}</label>
                     <div className="input">
                         <img src="./public/kulf.png" alt="" />
                         <input
@@ -52,7 +54,7 @@ const Login = ({ setIsLoggedIn }) => {
                     </div>
                 </div>
                 {error && <p className="error">{error}</p>}
-                <button className='btn' type="submit">Kirish</button>
+                <button className='btn' type="submit">{t('login')}</button>
             </form>
         </div>
     );

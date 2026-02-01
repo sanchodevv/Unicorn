@@ -1,53 +1,55 @@
 import React, { useState } from 'react';
 import { Table, Tag, Button, Input, Select, Modal, Form, Drawer } from "antd";
+import { useTranslation } from "react-i18next";
 import "./payments.css"
 
 const { Option } = Select;
 
-const columns = [
-  {
-    title: 'Created Date',
-    dataIndex: 'createdDate',
-    key: 'createdDate',
-  },
-  {
-    title: 'Total',
-    dataIndex: 'total',
-    key: 'total',
-  },
-  {
-    title: 'Payment Method',
-    dataIndex: 'paymentMethod',
-    key: 'paymentMethod',
-  },
-  {
-    title: 'Type',
-    dataIndex: 'type',
-    key: 'type',
-  },
-  {
-    title: 'Term',
-    dataIndex: 'term',
-    key: 'term',
-  },
-  {
-    title: 'Paid by',
-    dataIndex: 'paidBy',
-    key: 'paidBy',
-  },
-  {
-    title: 'Action',
-    key: 'action',
-    render: (_, record) => (
-      <span>
-        <a style={{ marginRight: 16 }}> <img src="/koz.png" alt="" /> {record.lastName}</a>
-       
-      </span>
-    ),
-  },
-];
-
 const Payments = () => {
+  const { t } = useTranslation();
+  
+  const columns = [
+    {
+      title: t('createdDate'),
+      dataIndex: 'createdDate',
+      key: 'createdDate',
+    },
+    {
+      title: t('total'),
+      dataIndex: 'total',
+      key: 'total',
+    },
+    {
+      title: t('paymentMethod'),
+      dataIndex: 'paymentMethod',
+      key: 'paymentMethod',
+    },
+    {
+      title: t('type'),
+      dataIndex: 'type',
+      key: 'type',
+    },
+    {
+      title: t('term'),
+      dataIndex: 'term',
+      key: 'term',
+    },
+    {
+      title: t('paidBy'),
+      dataIndex: 'paidBy',
+      key: 'paidBy',
+    },
+    {
+      title: 'Action',
+      key: 'action',
+      render: (_, record) => (
+        <span>
+          <a style={{ marginRight: 16 }}> <img src="/koz.png" alt="" /> {record.lastName}</a>
+         
+        </span>
+      ),
+    },
+  ];
   const [data, setData] = useState([
     {
       key: '1',

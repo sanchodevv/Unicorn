@@ -1,11 +1,14 @@
-import { menuData } from "../../constants/menuData";
+import { getMenuData } from "../../constants/menuData";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import "./aside.css"; 
 
 const Aside = () => {
     const [isMembershipOpen, setIsMembershipOpen] = useState(false);
     const navigate = useNavigate();
+    const menuData = getMenuData();
+    const { t } = useTranslation();
 
     const handleMembersClick = (e) => {
         e.preventDefault();
@@ -29,16 +32,11 @@ const Aside = () => {
         <div className="aside-navbar">
             {menuData.map((route, index) => (
                 <div key={index}>
-                    {route.name === "Members" ? (
+                    {route.path === "/members" ? (
                         <a className='link' onClick={handleMembersClick}>
                             <img src={route.img} alt={route.name} />
                             {route.name}
                             <span className={`arrow ${isMembershipOpen ? 'rotated' : ''}`}>▼</span>
-                        </a>,
-                        <a className='link' onClick={handleMembersClick}>
-                            <img src={route.img} alt={route.name} />
-                            {route.name}
-                            <span className={`arrow ${isGarBrandtOpen ? 'rotated' : ''}`}>▼</span>
                         </a>
                     ) : (
                         <Link className='link' to={route.path}>
@@ -46,20 +44,20 @@ const Aside = () => {
                             {route.name}
                         </Link>
                     )}
-                    {route.name === "Members" && (
+                    {route.path === "/members" && (
                         <div className={`membership-submenu ${isMembershipOpen ? 'open' : ''}`}>
                             <Link className='link' to="/membership">
-                                <img src="./public/members.png" alt="Membership" />
-                                Membership
+                                <img src="./public/members.png" alt={t('membership')} />
+                                {t('membership')}
                             </Link>
                             
                         </div>
                     )}
-                    {route.name === "Members" && (
+                    {route.path === "/members" && (
                         <div className={`garbrandt-submenu ${isGarBrandtOpen ? 'open' : ''}`}>
                             <Link className='link' to="/garbrandt">
-                                <img src="./public/members.png" alt="Garbrandt" />
-                                Garbrandt
+                                <img src="./public/members.png" alt={t('garbrant')} />
+                                {t('garbrant')}
                             </Link>
                             
                         </div>
@@ -71,8 +69,9 @@ const Aside = () => {
             <a href="#">
                 <img src="./public/log-out.png" alt="exit" />
             </a>
-                Logout
+                {t('logout')}
         </div>
     </aside>;
 };
+
 export default Aside;

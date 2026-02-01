@@ -1,4 +1,5 @@
 import Select from "react-select";
+import { useTranslation } from "react-i18next";
 import "./bar.css";
 
 const options = [
@@ -28,8 +29,25 @@ const options = [
     ),
   },
 ];
-const defaultValue = options[1];
 
 export default function LangSelect() {
-  return <Select options={options} defaultValue={defaultValue} />;
+  const { i18n } = useTranslation();
+  
+  const handleChange = (selectedOption) => {
+    if (selectedOption) {
+      i18n.changeLanguage(selectedOption.value);
+    }
+  };
+
+  const defaultValue = options.find(opt => opt.value === i18n.language) || options[1];
+
+  return (
+    <Select 
+      options={options} 
+      defaultValue={defaultValue}
+      onChange={handleChange}
+      isSearchable={false}
+      isClearable={false}
+    />
+  );
 }

@@ -1,29 +1,31 @@
 import React, { useState } from 'react';
 import { Table, Tag, Button, Input, Select, Modal, Form, Drawer } from "antd";
+import { useTranslation } from "react-i18next";
 import "./visithistory.css"
 
 const { Option } = Select;
 
-const columns = [
-  {
-    title: 'Members Name',
-    dataIndex: 'memberName',
-    key: 'memberName',
-  },
-  {
-    title: 'Visit Time',
-    dataIndex: 'visitTime',
-    key: 'visitTime',
-  },
-  {
-      title: 'Visit Date',
-      dataIndex: 'visitDate',
-      key: 'visitDate',
-    },
-   
-];
-
 const VisitHistory = () => {
+  const { t } = useTranslation();
+  
+  const columns = [
+    {
+      title: t('membersName'),
+      dataIndex: 'memberName',
+      key: 'memberName',
+    },
+    {
+      title: t('visitTime'),
+      dataIndex: 'visitTime',
+      key: 'visitTime',
+    },
+    {
+        title: t('visitDate'),
+        dataIndex: 'visitDate',
+        key: 'visitDate',
+      },
+     
+  ];
   const [data, setData] = useState([
     {
       key: '1',

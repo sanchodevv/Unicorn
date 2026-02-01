@@ -1,50 +1,52 @@
 import React, { useState } from 'react';
 import { Table,  Button, Input, Select, Modal, Form, Drawer } from "antd";
+import { useTranslation } from "react-i18next";
 import "./products.css"
 
 const { Option } = Select;
 
-const columns = [
-  {
-    title: 'Product Type',
-    dataIndex: 'productType',
-    key: 'productType',
-  },
-  {
-    title: 'Product Name',
-    dataIndex: 'productName',
-    key: 'productName',
-  },
-  
-  {
-    title: 'Unit Price',
-    dataIndex: 'unitPrice',
-    key: 'unitPrice',
-  },
-  
-  {
-    title: 'Supplier',
-    dataIndex: 'supplier',
-    key: 'supplier',
-  },
-  {
-    title: 'Stocks',
-    dataIndex: 'stocks',
-    key: 'stocks',
-  },
-  {
-    title: 'Action',
-    key: 'action',
-    render: (_, record) => (
-      <span>
-        <a style={{ marginRight: 16 }}> <img src="/qalam.png" alt="" /> {record.lastname  }</a>
-        <a><img src="/delete.png" alt="" /></a>
-      </span>
-    ),
-  },
-];
-
 const Products = () => {
+  const { t } = useTranslation();
+  
+  const columns = [
+    {
+      title: t('productType'),
+      dataIndex: 'productType',
+      key: 'productType',
+    },
+    {
+      title: t('productName'),
+      dataIndex: 'productName',
+      key: 'productName',
+    },
+    
+    {
+      title: t('unitPrice'),
+      dataIndex: 'unitPrice',
+      key: 'unitPrice',
+    },
+    
+    {
+      title: t('supplier'),
+      dataIndex: 'supplier',
+      key: 'supplier',
+    },
+    {
+      title: t('stocks'),
+      dataIndex: 'stocks',
+      key: 'stocks',
+    },
+    {
+      title: 'Action',
+      key: 'action',
+      render: (_, record) => (
+        <span>
+          <a style={{ marginRight: 16 }}> <img src="/qalam.png" alt="" /> {record.lastname  }</a>
+          <a><img src="/delete.png" alt="" /></a>
+        </span>
+      ),
+    },
+  ];
   const [data, setData] = useState([
     {
       key: '1',
