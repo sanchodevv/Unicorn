@@ -256,7 +256,7 @@ const Invertory = () => {
         >
           <Form.Item
             name="firstName"
-            label="Product Type"
+            label={t('productType')}
             rules={[{ required: true, message: 'Please enter ProductType' }]}
           >
             <Input />
@@ -296,7 +296,7 @@ const Invertory = () => {
            
           <Form.Item>
             <Button type="primary" htmlType="submit">
-              Add Member
+              {t('addMember')}
             </Button>
           </Form.Item>
         </Form>

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import "./aside.css"; 
 
-const Aside = () => {
+const Aside = ({ setIsLoggedIn }) => {
     const [isMembershipOpen, setIsMembershipOpen] = useState(false);
     const navigate = useNavigate();
     const menuData = getMenuData();
@@ -66,7 +66,7 @@ const Aside = () => {
             ))}
         </div>
         <div className="exit">
-            <a href="#">
+            <a href="#" onClick={() => setIsLoggedIn(false)}>
                 <img src="./public/log-out.png" alt="exit" />
             </a>
                 {t('logout')}

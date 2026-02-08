@@ -5,7 +5,7 @@ import "./members.css"
 
 const { Option } = Select;
 
-const Members = () => {
+const Members = ({ setIsLoggedIn }) => {
   const { t } = useTranslation();
   
   const columns = [
@@ -26,8 +26,8 @@ const Members = () => {
       render: status => (
         <>
           {status.map(tag => {
-            let color = tag.length > 5 ? 'green' : 'green';
-            if (tag === 'OUT OF STACK') {
+            let color = tag.length > 5 ? 'green' : 'red';
+            if (tag === 'OUT OF STOCK') {
               color = 'red';
             }
             return (
@@ -55,9 +55,9 @@ const Members = () => {
       render: (_, record) => (
         <span>
           <div className="loq">
-            <a> <img src="/log-out.png" alt="" /></a>
-          <a  onClick={() => setDrawerVisible(true)} style={{ marginRight: 16 }}>  <img src="/qalam.png" alt="" /> {record.lastName}</a>
-          <a><img src="/delete.png" alt="" /></a>
+            <a onClick={() => setIsLoggedIn(false)}> <img src="/log-out.png" alt="" /></a>
+          <a  onClick={() => handleEdit(record)} style={{ marginRight: 16 }}>  <img src="/qalam.png" alt="" /> {record.lastName}</a>
+          <a onClick={() => handleDelete(record.key)}><img src="/delete.png" alt="" /></a>
           </div>
         </span>
       ),
@@ -68,81 +68,81 @@ const Members = () => {
       key: '1',
       name: 'John Brown',
       phoneNumber: '123-456-7890',
-      status: ['AVAILABLE'],
-      type: 'Admin',
-      expireTime: 'in 3 month',
+      status: [t('available')],
+      type: t('admin'),
+      expireTime: t('inThreeMonths'),
     },
     {
       key: '2',
       name: 'Jim Green',
       phoneNumber: '123-456-7890',
-      status: ['OUT OF STACK'],
-      type: 'User',
-      expireTime: 'in 2 month',
+      status: [t('outOfStock')],
+      type: t('user'),
+      expireTime: t('inTwoMonths'),
     },
     {
       key: '3',
       name: 'Joe Black',
       phoneNumber: '123-456-7890',
-      status: ['AVAILABLE'],
-      type: 'Moderator',
-      expireTime: 'in 1 month',
+      status: [t('available')],
+      type: t('moderator'),
+      expireTime: t('inOneMonth'),
     },
     {
       key: '4',
       name: 'Joe Black',
       phoneNumber: '123-456-7890',
-      status: ['AVAILABLE'],
-      type: 'Moderator',
-      expireTime: 'in 1 month',
+      status: [t('available')],
+      type: t('moderator'),
+      expireTime: t('inOneMonth'),
     },
     {
       key: '5',
       name: 'Joe Black',
       phoneNumber: '123-456-7890',
-      status: ['AVAILABLE'],
-      type: 'Moderator',
-      expireTime: 'in 1 month',
+      status: [t('available')],
+      type: t('moderator'),
+      expireTime: t('inOneMonth'),
     },
     {
       key: '6',
       name: 'Joe Black',
       phoneNumber: '123-456-7890',
-      status: ['AVAILABLE'],
-      type: 'Moderator',
-      expireTime: 'in 1 month',
+      status: [t('available')],
+      type: t('moderator'),
+      expireTime: t('inOneMonth'),
     },
     {
       key: '7',
       name: 'Joe Black',
       phoneNumber: '123-456-7890',
-      status: ['AVAILABLE'],
-      type: 'Moderator',
-      expireTime: 'in 1 month',
+      status: [t('available')],
+      type: t('moderator'),
+      expireTime: t('inOneMonth'),
     },
     {
       key: '8',
       name: 'Leo Messi',
       phoneNumber: '123-456-7890',
-      status: ['OUT OF STACK'],
-      type: 'Moderator',
-      expireTime: 'in 4 month',
+      status: [t('outOfStock')],
+      type: t('moderator'),
+      expireTime: t('inThreeMonths'),
     },
     {
       key: '9',
       name: 'John Doe',
       phoneNumber: '123-456-7890',
-      status: ['AVAILABLE'],
-      type: 'Moderator',
-      expireTime: 'in 2 month',
+      status: [t('available')],
+      type: t('moderator'),
+      expireTime: t('inTwoMonths'),
     },
     {
       key: '10',
       name: 'Joed Blacks',
       phoneNumber: '123-456-7890',
-      status: ['AVAILABLE'],
-      type: 'Moderator',
-      expireTime: 'in 6 month',
+      status: [t('available')],
+      type: t('moderator'),
+      expireTime: t('inThreeMonths'),
     },
     {
       key: '11',
@@ -196,7 +196,24 @@ const Members = () => {
   const [searchText, setSearchText] = useState('');
   const [filterTag, setFilterTag] = useState('');
   const [drawerVisible, setDrawerVisible] = useState(false);
+  const [editingRecord, setEditingRecord] = useState(null);
   const [form] = Form.useForm();
+
+  const handleEdit = (record) => {
+    setEditingRecord(record);
+    form.setFieldsValue({
+      firstName: record.name.split(' ')[0],
+      phoneNumber: record.phoneNumber,
+      status: record.status[0] || '',
+      type: record.type,
+      expireTime: record.expireTime,
+    });
+    setDrawerVisible(true);
+  };
+
+  const handleDelete = (key) => {
+    setData(data.filter(item => item.key !== key));
+  };
 
   const filteredData = data.filter(item =>
     (item.name && item.name.toLowerCase().includes(searchText.toLowerCase())) &&
@@ -204,15 +221,33 @@ const Members = () => {
   );
 
   const handleAdd = (values) => {
-    const newMember = {
-      key: (data.length + 1).toString(),
-      name: `${values.firstName} ${values.lastName}`,
-      phoneNumber: values.phoneNumber,
-      status: values.tags || [],
-      type: values.type,
-      expireTime: values.expireTime,
-    };
-    setData([...data, newMember]);
+    if (editingRecord) {
+      // Update existing record
+      setData(data.map(item =>
+        item.key === editingRecord.key
+          ? {
+              ...item,
+              name: `${values.firstName} ${values.firstName}`,
+              phoneNumber: values.phoneNumber,
+              status: values.tags || [],
+              type: values.type,
+              expireTime: values.expireTime,
+            }
+          : item
+      ));
+      setEditingRecord(null);
+    } else {
+      // Add new record
+      const newMember = {
+        key: (data.length + 1).toString(),
+        name: `${values.firstName} ${values.firstName}`,
+        phoneNumber: values.phoneNumber,
+        status: values.tags || [],
+        type: values.type,
+        expireTime: values.expireTime,
+      };
+      setData([...data, newMember]);
+    }
     setDrawerVisible(false);
     form.resetFields();
   };
@@ -241,11 +276,9 @@ const Members = () => {
         >
           
           <Option value=""><img src="/filter.png" alt="" /> Filter</Option>
-          <Option value="nice">Nice</Option>
-          <Option value="developer">Developer</Option>
-          <Option value="loser">Loser</Option>
-          <Option value="cool">Cool</Option>
-          <Option value="teacher">Teacher</Option>
+          <Option value="available">Available</Option>
+          <Option value="outOfStock">Out of Stock</Option>
+          
         </Select>
         <Button type="primary" onClick={() => setDrawerVisible(true)}> <img src="/pilus.png" alt="" /> Add New</Button>
         </div>
@@ -261,9 +294,13 @@ const Members = () => {
   className="members-table" />
       </div>
       <Drawer
-        title="Add New Member"
+        title={editingRecord ? "Edit Member" : "Add New Member"}
         placement="right"
-        onClose={() => setDrawerVisible(false)}
+        onClose={() => {
+          setDrawerVisible(false);
+          setEditingRecord(null);
+          form.resetFields();
+        }}
         open={drawerVisible}
         size={400}
       >

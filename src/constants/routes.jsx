@@ -7,6 +7,7 @@ import Payments from "../Pages/Payments/payments";
 import Pos from "../Pages/Pos/pos";
 import Products from "../Pages/Products/products";
 import VisitHistory from "../Pages/VisitHistories/visithistory";
+import Login from "../Pages/Login/login";
 
 export const routes = [
 
@@ -55,7 +56,7 @@ export const routes = [
         key: 8,
         path: "/garbrandt",
         element: Garbrandt
-    }
+    },
     
 
 ];

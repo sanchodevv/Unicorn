@@ -71,12 +71,13 @@ useEffect(() => {
       <h2>{product.title}</h2>
       <p>{t('brand')}: {product.brand}</p>
       <p>{t('quality')}: {product.category}</p>
-      <button><img src="/pos.png" alt="" onClick={() => addToCart(product)} />{t('addToCart')} ({cart.length})</button>
+      <button onClick={() => addToCart(product)}><img src="/pos.png" alt="" />{t('addToCart')} ({cart.length})</button>
     </div>
   ))}
   {isCartOpen && (
   <div className="sale-panel">
     <h3>{t('saleSummary')}</h3>
+    <button className="close-btn" onClick={() => setIsCartOpen(false)}>✕</button>
 
     {cart.map(item => (
       <div key={item.id} className="sale-item">
@@ -100,7 +101,7 @@ useEffect(() => {
       <b>{t('total')}:</b> <span>${total.toFixed(2)}</span>
     </div>
 
-    <button className="pay-btn">MAKE PAYMENT</button>
+    <button className="pay-btn" onClick={() => alert("payment succesfully done")}>MAKE PAYMENT</button>
   </div>
 )}
 

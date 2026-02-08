@@ -146,6 +146,17 @@
   border: none;
   font-weight: bold;
 }
+.close-btn {
+  position: absolute;
+  top: 30px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  font-weight: 900;
+  color: white;
+  cursor: pointer;
+}
 
 .total {
   display: flex;

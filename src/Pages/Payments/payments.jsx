@@ -7,6 +7,7 @@ const { Option } = Select;
 
 const Payments = () => {
   const { t } = useTranslation();
+  const [viewingRecord, setViewingRecord] = useState(null);
   
   const columns = [
     {
@@ -40,11 +41,11 @@ const Payments = () => {
       key: 'paidBy',
     },
     {
-      title: 'Action',
+      title: t('action'),
       key: 'action',
       render: (_, record) => (
         <span>
-          <a style={{ marginRight: 16 }}> <img src="/koz.png" alt="" /> {record.lastName}</a>
+          <a onClick={() => setViewingRecord(record)} style={{ marginRight: 16 }}> <img src="/koz.png" alt="" /> {record.lastName}</a>
          
         </span>
       ),
@@ -55,8 +56,8 @@ const Payments = () => {
       key: '1',
       createdDate: 'December 25, 2022 14:17',
       total: '$100',
-      paymentMethod: 'Checks',
-      type: 'Standard',
+      paymentMethod: t('checks'),
+      type: t('standard'),
         term: '1 Month',
         paidBy: 'John Doe',
     },
@@ -64,8 +65,8 @@ const Payments = () => {
         key: '2',
         createdDate: 'December 26, 2022 10:30',
         total: '$150',
-        paymentMethod: 'Credit Card',
-        type: 'Premium',
+        paymentMethod: t('creditCard'),
+        type: t('premium'),
         term: '3 Months',
         paidBy: 'Jane Smith',
     },
@@ -73,8 +74,8 @@ const Payments = () => {
       key: '3',
         createdDate: 'December 27, 2022 09:45',
         total: '$200',
-        paymentMethod: 'PayPal',
-        type: 'Standard',
+        paymentMethod: t('paypal'),
+        type: t('standard'),
         term: '6 Months',
         paidBy: 'Alice Johnson',
     },
@@ -82,8 +83,8 @@ const Payments = () => {
       key: '4',
         createdDate: 'December 28, 2022 11:20',
         total: '$250',
-        paymentMethod: 'Bank Transfer',
-        type: 'Premium',
+        paymentMethod: t('bankTransfer'),
+        type: t('premium'),
         term: '12 Months',
         paidBy: 'Bob Brown',
     },
@@ -91,8 +92,8 @@ const Payments = () => {
       key: '5',
         createdDate: 'December 29, 2022 15:55',
         total: '$300',
-        paymentMethod: 'Credit Card',
-        type: 'Standard',
+        paymentMethod: t('creditCard'),
+        type: t('standard'),
         term: '1 Month',
         paidBy: 'Charlie Davis',
     },
@@ -207,8 +208,6 @@ const Payments = () => {
   );
   const [currentPage, setCurrentPage] = useState(1);
 
- 
-
   return (
     <div >
       <div className ='uno' style={{ marginBottom: 16 }}>
@@ -249,6 +248,44 @@ const Payments = () => {
         }}
         className="payments-table" />
       </div>
+
+      <Modal
+        title="Payment Details"
+        open={viewingRecord !== null}
+        onCancel={() => setViewingRecord(null)}
+        footer={null}
+        centered
+        style={{ padding: '24px' }}
+      >
+        {viewingRecord && (
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+            <div>
+              <p style={{ margin: 0, color: '#666' }}>Created Date</p>
+              <p style={{ margin: '4px 0 16px 0', fontWeight: 'bold' }}>{viewingRecord.createdDate}</p>
+            </div>
+            <div>
+              <p style={{ margin: 0, color: '#666' }}>Total</p>
+              <p style={{ margin: '4px 0 16px 0', fontWeight: 'bold' }}>{viewingRecord.total}</p>
+            </div>
+            <div>
+              <p style={{ margin: 0, color: '#666' }}>Payment Method</p>
+              <p style={{ margin: '4px 0 16px 0', fontWeight: 'bold' }}>{viewingRecord.paymentMethod}</p>
+            </div>
+            <div>
+              <p style={{ margin: 0, color: '#666' }}>Type</p>
+              <p style={{ margin: '4px 0 16px 0', fontWeight: 'bold' }}>{viewingRecord.type}</p>
+            </div>
+            <div>
+              <p style={{ margin: 0, color: '#666' }}>Term</p>
+              <p style={{ margin: '4px 0 16px 0', fontWeight: 'bold' }}>{viewingRecord.term}</p>
+            </div>
+            <div>
+              <p style={{ margin: 0, color: '#666' }}>Paid By</p>
+              <p style={{ margin: '4px 0 16px 0', fontWeight: 'bold' }}>{viewingRecord.paidBy}</p>
+            </div>
+          </div>
+        )}
+      </Modal>
      
     </div>
   );

@@ -42,6 +42,11 @@
     background-color: #444858 !important;
     color: white !important;
 }
+.ant-form-item-required::before{
+    display: none !important;
+    
+
+}
 .ant-select{
     background-color: #343743;
     border: none;

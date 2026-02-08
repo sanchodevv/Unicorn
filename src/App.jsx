@@ -6,11 +6,11 @@ import { routes } from "./constants/routes";
 import Login from "./Pages/Login/login";
 
 const App = () => {
-    // const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    // if (!isLoggedIn) {
-    //     return <Login setIsLoggedIn={setIsLoggedIn} />;
-    // }
+    if (!isLoggedIn) {
+        return <Login setIsLoggedIn={setIsLoggedIn} />;
+    }
 
     return (
         <>
@@ -23,7 +23,7 @@ const App = () => {
                                 <Route
                                 key={index}
                                 path={route.path}
-                                element={<route.element />}
+                                element={<route.element setIsLoggedIn={setIsLoggedIn} />}
                                 />
                             ))
                         }

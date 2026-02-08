@@ -2,63 +2,74 @@ import { Button, Flex, Space, Table, Tag, Drawer, Form, Input, Select } from "an
 import { useState } from "react";
 import "./membership.css"
 
-const columns = [
-  {
-    title: 'MembershipTypeName',
-    dataIndex: 'membershiptypename',
-    key: 'membershiptypename',
-    render: text => <a>{text}</a>,
-  },
-  {
-    title: 'MonthlyFree',
-    dataIndex: 'monthlyfree',
-    key: 'monthlyfree',
-  },
-  {
-    title: 'DiscountPercent',
-    dataIndex: 'discountpercent',
-    key: 'discountpercent',
-  },
-  
-  {
-    title: 'Action',
-    key: 'action',
-    render: (_, record) => (
-      <Space size="middle">
-        <a><img src="/qalam.png" alt="" /> {record.name}</a>
-        <a><img src="/delete.png" alt="" /></a>
-      </Space>
-    ),
-  },
-];
-const data = [
-  {
-    key: '1',
-    membershiptypename: 'Standart',
-    monthlyfree: '$100',
-    discountpercent: '0%',
-   
-  },
-  {
-    key: '2',
-    membershiptypename: 'Premium',
-    monthlyfree: '$200',
-    discountpercent: '10%',
-
-  },
-  {
-    key: '3',
-    membershiptypename: 'Business',
-    monthlyfree: '$300',
-    discountpercent: '0%',
-    
-  },
-];
 const Membership = () => {
     const [drawerVisible, setDrawerVisible] = useState(false);
-    const [dataSource, setDataSource] = useState(data);
+    const [dataSource, setDataSource] = useState([
+      {
+        key: '1',
+        membershiptypename: 'Standart',
+        monthlyfree: '$100',
+        discountpercent: '0%',
+      },
+      {
+        key: '2',
+        membershiptypename: 'Premium',
+        monthlyfree: '$200',
+        discountpercent: '10%',
+      },
+      {
+        key: '3',
+        membershiptypename: 'Business',
+        monthlyfree: '$300',
+        discountpercent: '0%',
+      },
+    ]);
     const [editingRecord, setEditingRecord] = useState(null);
     const [form] = Form.useForm();
+
+    const handleEdit = (record) => {
+      setEditingRecord(record);
+      form.setFieldsValue({
+        type: record.membershiptypename,
+        monthlyfree: record.monthlyfree,
+        discount: parseInt(record.discountpercent),
+      });
+      setDrawerVisible(true);
+    };
+
+    const handleDelete = (key) => {
+      setDataSource(dataSource.filter(item => item.key !== key));
+    };
+
+    const columns = [
+      {
+        title: 'MembershipTypeName',
+        dataIndex: 'membershiptypename',
+        key: 'membershiptypename',
+        render: text => <a>{text}</a>,
+      },
+      {
+        title: 'MonthlyFree',
+        dataIndex: 'monthlyfree',
+        key: 'monthlyfree',
+      },
+      {
+        title: 'DiscountPercent',
+        dataIndex: 'discountpercent',
+        key: 'discountpercent',
+      },
+      
+      {
+        title: 'Action',
+        key: 'action',
+        render: (_, record) => (
+          <Space size="middle">
+            <a  onClick={() => handleEdit(record)} style={{ marginRight: 16 }}>  <img src="/qalam.png" alt="" /> {record.lastName}</a>
+              <a onClick={() => handleDelete(record.key)}><img src="/delete.png" alt="" /></a>
+          </Space>
+        ),
+      },
+    ];
     return (
         <>
             <h3>Membership Types</h3>
@@ -74,9 +85,13 @@ const Membership = () => {
             </div>
 
             <Drawer
-                title="Add Membership"
+                title={editingRecord ? "Edit Membership" : "Add Membership"}
                 placement="right"
-                onClose={() => setDrawerVisible(false)}
+                onClose={() => {
+                  setDrawerVisible(false);
+                  setEditingRecord(null);
+                  form.resetFields();
+                }}
                 open={drawerVisible}
                 size={400}
             >
@@ -84,13 +99,29 @@ const Membership = () => {
                     form={form}
                     layout="vertical"
                     onFinish={(values) => {
-                        const newItem = {
-                            key: (dataSource.length + 1).toString(),
-                            membershiptypename: values.type,
-                            monthlyfree: values.monthlyfree,
-                            discountpercent: `${values.discount}%`,
-                        };
-                        setDataSource([...dataSource, newItem]);
+                        if (editingRecord) {
+                          // Update existing record
+                          setDataSource(dataSource.map(item =>
+                            item.key === editingRecord.key
+                              ? {
+                                  ...item,
+                                  membershiptypename: values.type,
+                                  monthlyfree: values.monthlyfree,
+                                  discountpercent: `${values.discount}%`,
+                                }
+                              : item
+                          ));
+                          setEditingRecord(null);
+                        } else {
+                          // Add new record
+                          const newItem = {
+                              key: (dataSource.length + 1).toString(),
+                              membershiptypename: values.type,
+                              monthlyfree: values.monthlyfree,
+                              discountpercent: `${values.discount}%`,
+                          };
+                          setDataSource([...dataSource, newItem]);
+                        }
                         setDrawerVisible(false);
                         form.resetFields();
                     }}

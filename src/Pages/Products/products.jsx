@@ -41,8 +41,8 @@ const Products = () => {
       key: 'action',
       render: (_, record) => (
         <span>
-          <a style={{ marginRight: 16 }}> <img src="/qalam.png" alt="" /> {record.lastname  }</a>
-          <a><img src="/delete.png" alt="" /></a>
+          <a style={{ marginRight: 16 }} onClick={() => handleEdit(record)}> <img src="/qalam.png" alt="" /> {record.lastname  }</a>
+          <a onClick={() => handleDelete(record.key)}><img src="/delete.png" alt="" /></a>
         </span>
       ),
     },
@@ -197,7 +197,24 @@ const Products = () => {
   const [searchText, setSearchText] = useState('');
   const [filterTag, setFilterTag] = useState('');
   const [drawerVisible, setDrawerVisible] = useState(false);
+  const [editingRecord, setEditingRecord] = useState(null);
   const [form] = Form.useForm();
+
+  const handleEdit = (record) => {
+    setEditingRecord(record);
+    form.setFieldsValue({
+      productType: record.productType,
+      productName: record.productName,
+      unitPrice: record.unitPrice,
+      supplier: record.supplier,
+      stocks: record.stocks,
+    });
+    setDrawerVisible(true);
+  };
+
+  const handleDelete = (key) => {
+    setData(data.filter(item => item.key !== key));
+  };
 
   const filteredData = data.filter(item =>
     (item.productName && item.productName.toLowerCase().includes(searchText.toLowerCase())) &&
@@ -205,18 +222,35 @@ const Products = () => {
   );
 
   const handleAdd = (values) => {
-    const newMember = {
-      key: (data.length + 1).toString(),
-      productType: `${values.productType}`,
-      productName: `${values.productName}`,
-      unitPrice: values.unitPrice,
-      supplier: values.supplier,
-      stocks: values.stocks,
-      status: values.tags || [],
-      type: values.type,
-      expireTime: values.expireTime,
-    };
-    setData([...data, newMember]);
+    if (editingRecord) {
+      // Update existing record
+      setData(data.map(item =>
+        item.key === editingRecord.key
+          ? {
+              ...item,
+              productType: values.productType,
+              productName: values.productName,
+              unitPrice: values.unitPrice,
+              supplier: values.supplier,
+              stocks: values.stocks,
+            }
+          : item
+      ));
+      setEditingRecord(null);
+    } else {
+      // Add new record
+      const newMember = {
+        key: (data.length + 1).toString(),
+        productType: `${values.productType}`,
+        productName: `${values.productName}`,
+        unitPrice: values.unitPrice,
+        supplier: values.supplier,
+        stocks: values.stocks,
+       
+      
+      };
+      setData([...data, newMember]);
+    }
     setDrawerVisible(false);
     form.resetFields();
   };
@@ -262,9 +296,13 @@ const Products = () => {
         className="members-table" />
       </div>
       <Drawer
-        title="Add New Member"
+        title={editingRecord ? "Edit Product" : "Add New Product"}
         placement="right"
-        onClose={() => setDrawerVisible(false)}
+        onClose={() => {
+          setDrawerVisible(false);
+          setEditingRecord(null);
+          form.resetFields();
+        }}
         open={drawerVisible}
         size={400}
       >

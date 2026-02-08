@@ -4,7 +4,87 @@ import "./garbrandt.css"
 
 const { Option } = Select;
 
-const columns = [
+const Garbrandt = () => {
+  const [data, setData] = useState([
+    {
+      key: '1',
+      membershipType: 'Standart',
+      term: '1 Month',
+      startDate: 'February 22, 2023',
+      endDate: 'March 22, 2023',
+      status: ['active'],
+    },
+    {
+      key: '2',
+      membershipType: 'Premium',
+      term: '3 Months',
+      startDate: 'January 15, 2023',
+      endDate: 'April 15, 2023',
+      status: ['ON HOLD'],
+    },
+    {
+      key: '3',
+      membershipType: 'VIP',
+      term: '6 Months',
+      startDate: 'December 1, 2022',
+      endDate: 'June 1, 2023',
+      status: ['ON HOLD'],
+    },
+  ]);
+
+  const [drawerVisible, setDrawerVisible] = useState(false);
+  const [editingRecord, setEditingRecord] = useState(null);
+  const [form] = Form.useForm();
+
+  const handleEdit = (record) => {
+    setEditingRecord(record);
+    form.setFieldsValue({
+      membershipType: record.membershipType,
+      term: record.term,
+      startDate: record.startDate,
+      endDate: record.endDate,
+      status: record.status[0] || '',
+    });
+    setDrawerVisible(true);
+  };
+
+  const handleDelete = (key) => {
+    setData(data.filter(item => item.key !== key));
+  };
+
+  const handleAdd = (values) => {
+    if (editingRecord) {
+      // Update existing record
+      setData(data.map(item =>
+        item.key === editingRecord.key
+          ? {
+              ...item,
+              membershipType: values.membershipType,
+              term: values.term,
+              startDate: values.startDate,
+              endDate: values.endDate,
+              status: values.status ? [values.status] : [],
+            }
+          : item
+      ));
+      setEditingRecord(null);
+    } else {
+      // Add new record
+      const newMember = {
+        key: (data.length + 1).toString(),
+        membershipType: values.membershipType,
+        term: values.term,
+        startDate: values.startDate,
+        endDate: values.endDate,
+        status: values.status ? [values.status] : [],
+      };
+      setData([...data, newMember]);
+    }
+    setDrawerVisible(false);
+    form.resetFields();
+  };
+
+  const columns = [
   {
     title: 'Membership Type',
     dataIndex: 'membershipType',
@@ -50,62 +130,13 @@ const columns = [
     key: 'action',
     render: (_, record) => (
       <span>
-        <a onClick={() => setDrawerVisible(true)} style={{ marginRight: 16 }}> <img src="/qalam.png" alt="" /> {record.lastName}</a>
-        <a><img src="/delete.png" alt="" /></a>
+        <a onClick={() => handleEdit(record)} style={{ marginRight: 16 }}> <img src="/qalam.png" alt="" /> {record.lastName}</a>
+        <a onClick={() => handleDelete(record.key)}><img src="/delete.png" alt="" /></a>
       </span>
     ),
   },
-];
+  ];
 
-const Garbrandt = () => {
-  const [data, setData] = useState([
-    {
-      key: '1',
-        membershipType: 'Standart',
-        term: '1 Month',
-        startDate: 'February 22, 2023',
-        endDate: 'March 22, 2023',
-        status: ['active'],
-    },
-    {
-      key: '2',
-      membershipType: 'Premium',
-      term: '3 Months',
-      startDate: 'January 15, 2023',
-      endDate: 'April 15, 2023',
-      status: ['ON HOLD'],
-    },
-    {
-      key: '3',
-        membershipType: 'VIP',
-        term: '6 Months',
-        startDate: 'December 1, 2022',
-        endDate: 'June 1, 2023',
-        status: ['ON HOLD'],
-    },
-   
-  ]);
-
- 
-  const [drawerVisible, setDrawerVisible] = useState(false);
-  const [form] = Form.useForm();
-
- 
-
-  const handleAdd = (values) => {
-    const newMember = {
-      key: (data.length + 1).toString(),
-      membershipType: values.membershipType,
-      term: values.term,
-      startDate: values.startDate,
-      endDate: values.endDate,
-      status: values.status || [],
-    };
-    setData([...data, newMember]);
-    setDrawerVisible(false);
-    form.resetFields();
-  };
-  
   return (
     <div >
       <div className ='uno' style={{ marginBottom: 16 }}>
@@ -124,9 +155,13 @@ const Garbrandt = () => {
         className="members-table" />
       </div>
       <Drawer
-        title="Add New Member"
+        title={editingRecord ? "Edit Membership" : "Add New Membership"}
         placement="right"
-        onClose={() => setDrawerVisible(false)}
+        onClose={() => {
+          setDrawerVisible(false);
+          setEditingRecord(null);
+          form.resetFields();
+        }}
         open={drawerVisible}
         size={400}
       >
@@ -169,14 +204,13 @@ const Garbrandt = () => {
             rules={[{ required: true, message: 'Please select status' }]}
           >
             <Select placeholder="Select type">
-              <Option value="Admin">Active</Option>
-              <Option value="User">ON HOLD</Option>
-              
+              <Option value="Active">Active</Option>
+              <Option value="ON HOLD">ON HOLD</Option>
             </Select>
           </Form.Item>
           <Form.Item>
             <Button type="primary" htmlType="submit">
-              Add Member
+              {editingRecord ? 'Update Member' : 'Add Member'}
             </Button>
           </Form.Item>
         </Form>
@@ -184,5 +218,6 @@ const Garbrandt = () => {
     </div>
   );
 };
+
 
 export default Garbrandt;
