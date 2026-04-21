@@ -43,10 +43,10 @@ useEffect(() => {
       setProduct(data.products);
     });
 }, []);
-     const [searchText, setSearchText] = useState('');
-      const filteredData = products.filter(item =>
+    const [searchText, setSearchText] = useState('');
+    const filteredData = products.filter(item =>
     (item.title && item.title.toLowerCase().includes(searchText.toLowerCase()))
-  );    
+    );    
     return (
 <>
        <div className="sav">

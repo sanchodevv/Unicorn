@@ -57,6 +57,8 @@
     width: 449px;
     padding: 10px;
     border: none;
+    color: white;
+    outline: none;
     background: transparent;
     border-radius: 20px;
 }

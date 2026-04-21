@@ -38,6 +38,7 @@
 .top-stats{
     background-color: #343743 !important;
     margin-bottom: 0 !important;
+    width: 1110px;
     padding: 32px !important;
     border-top-left-radius: 20px !important;
     border-top-right-radius: 20px !important;
@@ -45,6 +46,7 @@
 .chart-container{
     background-color: #343743 !important;
     border-top-left-radius: 0 !important;
+    width: 1110px !important;
     border-top-right-radius: 0 !important;
     border-bottom-left-radius: 20px !important;
     border-bottom-right-radius: 20px !important;
