@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Table,  Button, Input, Select, Modal, Form, Drawer } from "antd";
 import { useTranslation } from "react-i18next";
+import { Edit2, Trash2, Plus, Search, Filter } from "lucide-react";
 import "./products.css"
 
 const { Option } = Select;
@@ -40,9 +41,13 @@ const Products = () => {
       title: 'Action',
       key: 'action',
       render: (_, record) => (
-        <span>
-          <a style={{ marginRight: 16 }} onClick={() => handleEdit(record)}> <img src="/qalam.png" alt="" /> {record.lastname  }</a>
-          <a onClick={() => handleDelete(record.key)}><img src="/delete.png" alt="" /></a>
+        <span className="loq">
+          <a onClick={() => handleEdit(record)} style={{ marginRight: 16 }} title="Edit">
+            <Edit2 size={16} style={{ color: '#9B74F0' }} />
+          </a>
+          <a onClick={() => handleDelete(record.key)} title="Delete">
+            <Trash2 size={16} style={{ color: '#ff4d4f' }} />
+          </a>
         </span>
       ),
     },
@@ -261,7 +266,7 @@ const Products = () => {
       <div className ='uno' style={{ marginBottom: 16 }}>
         <div  className="inp">
 
-          <img src="/search.png" alt="" />
+          <Search size={18} style={{ color: '#9B74F0', marginLeft: '16px', marginRight: '8px', alignSelf: 'center' }} />
           <Input
           placeholder="Search by name"
           value={searchText}
@@ -276,13 +281,13 @@ const Products = () => {
           onChange={setFilterTag}
           style={{ width: 126, marginRight: 16 }}
         >
-          <Option value=""><img src="/filter.png" alt="" /> Filter</Option>
+          <Option value=""><span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}><Filter size={14} /> Filter</span></Option>
           <Option value="Drinks">Drinks</Option>
           <Option value="Clothes">Clothes</Option>
           <Option value="Supplements">Supplements</Option>
           <Option value="Food">Food</Option>
         </Select>
-        <Button type="primary" onClick={() => setDrawerVisible(true)}> <img src="/pilus.png" alt="" /> Add New</Button>
+        <Button type="primary" onClick={() => setDrawerVisible(true)} icon={<Plus size={16} />}> Add New</Button>
         </div>
       </div>
       <div className="members-table-wrapper">
@@ -346,60 +351,9 @@ const Products = () => {
           >
             <Input />
           </Form.Item>
-          <Form.Item
-            name="phoneNumber"
-            label="Phone Number"
-            rules={[{ required: true, message: 'Please enter phone number' }]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            name="status"
-            label="Status"
-            rules={[{ required: true, message: 'Please enter status' }]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            name="type"
-            label="Type"
-            rules={[{ required: true, message: 'Please select type' }]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            name="type"
-            label="Type"
-            rules={[{ required: true, message: 'Please select type' }]}
-          >
-            <Select placeholder="Select type">
-              <Option value="Admin">Admin</Option>
-              <Option value="User">User</Option>
-              <Option value="Moderator">Moderator</Option>
-            </Select>
-          </Form.Item>
-          <Form.Item
-            name="expireTime"
-            label="Expire Time"
-            rules={[{ required: true, message: 'Please enter expire time' }]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            name="tags"
-            label="Tags"
-          >
-            <Select mode="multiple" placeholder="Select tags">
-              <Option value="nice">Nice</Option>
-              <Option value="developer">Developer</Option>
-              <Option value="loser">Loser</Option>
-              <Option value="cool">Cool</Option>
-              <Option value="teacher">Teacher</Option>
-            </Select>
-          </Form.Item>
           <Form.Item>
             <Button type="primary" htmlType="submit">
-              Add Member
+              {editingRecord ? 'Save Changes' : 'Add Product'}
             </Button>
           </Form.Item>
         </Form>

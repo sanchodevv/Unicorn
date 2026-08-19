@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Table, Tag, Button, Input, Select, Modal, Form, Drawer } from "antd";
 import { useTranslation } from "react-i18next";
+import { Plus, Search, Filter } from "lucide-react";
 import "./invertory.css"
 
 const { Option } = Select;
@@ -194,10 +195,10 @@ const Invertory = () => {
     const newMember = {
       key: (data.length + 1).toString(),
       productType: values.productType,
-      productName: `${values.firstName} ${values.lastName}`,
+      productName: values.productName,
       supplier: values.supplier,
-      stocks: values.stocks,
-      status: values.tags || [],
+      stocks: parseInt(values.stocks) || 0,
+      status: values.status ? [values.status] : [],
     };
     setData([...data, newMember]);
     setDrawerVisible(false);
@@ -209,7 +210,7 @@ const Invertory = () => {
     <div >
       <div className ='uno' style={{ marginBottom: 16 }}>
         <div  className="inp">
-          <img src="/search.png" alt="" />
+          <Search size={18} style={{ color: '#9B74F0', marginLeft: '16px', marginRight: '8px', alignSelf: 'center' }} />
           <Input
           placeholder="Search by name"
           value={searchText}
@@ -225,11 +226,11 @@ const Invertory = () => {
           style={{ width: 126, marginRight: 16 }}
         >
           
-          <Option value=""> <img src="/filter.png" alt="" /> Filter</Option>
+          <Option value=""><span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}><Filter size={14} /> Filter</span></Option>
           <Option value="available">Available</Option>
           <Option value="out of stock">Out of Stock</Option>
         </Select>
-        <Button type="primary" onClick={() => setDrawerVisible(true)}> <img src="/pilus.png" alt="" /> Add New</Button>
+        <Button type="primary" onClick={() => setDrawerVisible(true)} icon={<Plus size={16} />}> Add New</Button>
         </div>
       </div>
       <div className="members-table-wrapper">
@@ -255,48 +256,48 @@ const Invertory = () => {
           onFinish={handleAdd}
         >
           <Form.Item
-            name="firstName"
+            name="productType"
             label={t('productType')}
             rules={[{ required: true, message: 'Please enter ProductType' }]}
           >
             <Input />
           </Form.Item>
           <Form.Item
-            name="phoneNumber"
+            name="productName"
             label="Product Name"
             rules={[{ required: true, message: 'Please enter ProductName' }]}
           >
             <Input />
           </Form.Item>
           <Form.Item
-            name="status"
+            name="supplier"
             label="Supplier"
-            rules={[{ required: true, message: 'Please enter Suppilier' }]}
+            rules={[{ required: true, message: 'Please enter Supplier' }]}
           >
             <Input />
           </Form.Item>
           <Form.Item
-            name="type"
+            name="stocks"
             label="Stocks"
             rules={[{ required: true, message: 'Please select Stock' }]}
           >
             <Input />
           </Form.Item>
           <Form.Item
-            name="Status"
+            name="status"
             label="Status"
             rules={[{ required: true, message: 'Please select status' }]}
           >
-            <Select placeholder="Select type">
-              <Option value="Admin">Availabel</Option>
-              <Option value="User">Stock in out</Option>
+            <Select placeholder="Select status">
+              <Option value="available">Available</Option>
+              <Option value="out of stock">Out of Stock</Option>
             </Select>
           </Form.Item>
           
            
           <Form.Item>
             <Button type="primary" htmlType="submit">
-              {t('addMember')}
+              Add Inventory Item
             </Button>
           </Form.Item>
         </Form>

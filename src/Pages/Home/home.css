@@ -36,36 +36,49 @@
     flex: 1;
 }
 .top-stats{
-    background-color: #343743 !important;
+    background-color: var(--bg-card) !important;
+    backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--border-color);
     margin-bottom: 0 !important;
-    width: 1110px;
+    width: 100%;
+    max-width: 1110px;
     padding: 32px !important;
     border-top-left-radius: 20px !important;
     border-top-right-radius: 20px !important;
 }
 .chart-container{
-    background-color: #343743 !important;
-    border-top-left-radius: 0 !important;
-    width: 1110px !important;
-    border-top-right-radius: 0 !important;
+    background-color: var(--bg-card) !important;
+    backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--border-color);
+    border-top: none !important;
+    width: 100% !important;
+    max-width: 1110px !important;
     border-bottom-left-radius: 20px !important;
     border-bottom-right-radius: 20px !important;
+    padding: 24px !important;
 }
 .period-buttons{
-    background-color: #272A30 !important;
-    padding: 5px !important;
-    border-radius: 14px;
+    background-color: rgba(15, 23, 42, 0.5) !important;
+    padding: 4px !important;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
 }
 .period-btn{
     background-color: transparent !important;
     border: none !important;
-    border-radius: 14px !important;
-    /* color: #999 !important; */
+    border-radius: 8px !important;
+    color: var(--text-secondary) !important;
+    font-weight: 500 !important;
+    padding: 8px 16px !important;
+    transition: all 0.3s ease !important;
+}
+.period-btn:hover {
+    color: var(--text-primary) !important;
 }
 .period-btn.active {
-    background-color: #a78bfa !important;
-    border-color: #a78bfa !important;
+    background-color: var(--primary) !important;
     color: white !important;
+    box-shadow: 0 4px 12px var(--primary-glow) !important;
 }
 .stats-period {
     color: #999;
@@ -152,13 +165,15 @@
 }
 
 .stat-card {
-    background: #343743;
+    background: var(--bg-card);
+    backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--border-color);
     border-radius: 20px;
-    padding: 20px;
+    padding: 24px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    /* border-left: 4px solid #a78bfa; */
+    gap: 16px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .stat-card-header {
@@ -181,10 +196,10 @@
 
 .stat-card-value {
     color: white;
-    font-size: 28px;
-    font-weight: 700;
+    font-size: 32px;
+    font-weight: 800;
     margin: 0;
-    margin-left: 40px;
+    margin-left: 0px;
 }
 
 /* Responsive Design */

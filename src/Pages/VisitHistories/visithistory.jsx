@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Table, Tag, Button, Input, Select, Modal, Form, Drawer } from "antd";
 import { useTranslation } from "react-i18next";
+import { Search, Filter } from "lucide-react";
 import "./visithistory.css"
 
 const { Option } = Select;
@@ -142,7 +143,7 @@ const [currentPage, setCurrentPage] = useState(1);
     <div >
       <div className ='uno' style={{ marginBottom: 16 }}>
         <div  className="inp">
-          <img src="/search.png" alt="" />
+          <Search size={18} style={{ color: '#9B74F0', marginLeft: '16px', marginRight: '8px', alignSelf: 'center' }} />
           <Input
           placeholder="Search by name"
           value={searchText}
@@ -157,7 +158,7 @@ const [currentPage, setCurrentPage] = useState(1);
           onChange={setFilterTag}
           style={{ width: 126, marginRight: 16 }}
         >
-          <Option value=""><img src="/filter.png" alt="" /> Filter</Option>
+          <Option value=""><span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}><Filter size={14} /> Filter</span></Option>
           <Option value="2023">2023</Option>
           <Option value="2024">2024</Option>
           <Option value="2025">2025</Option>

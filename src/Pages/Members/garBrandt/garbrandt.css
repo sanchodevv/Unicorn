@@ -1,5 +1,10 @@
-.add1{
-    margin-left: 867px;
+.sle {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+.add1 {
+    margin-left: 0;
 }
 .h4{
     margin-top: 26px;

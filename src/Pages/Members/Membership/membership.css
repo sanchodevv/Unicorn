@@ -32,32 +32,28 @@
     color: white !important;
 }
 .membership-table-wrapper .ant-table {
-    /* Membership jadvali uchun maxsus stillar */
-    margin-left: -330px; /* 200px chapga surish */
+    border-radius: 20px !important;
 }
-h3{
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 24px;
+    margin-bottom: 24px;
+    width: 100%;
+    max-width: 800px;
+}
+.page-header h3 {
     color: white !important;
-    margin-top: 102px;
-    margin-left: 60px;
     font-size: 22px;
-    line-height: 28px;
-    height: 50px;
     font-weight: 700;
-}
-.add{
-    position: relative;
-    top: 94px;
-    left: 734px;
-    
+    margin: 0;
 }
 .membership-table-wrapper .ant-spin-container{
-    /* margin-top: 24px !important; */
-    width: 650px;
+    width: 100%;
+    max-width: 800px;
     border-radius: 20px !important;
-    margin-top: 164px;
-}
-.membership-table-wrapper .ant-table{
-    border-radius: 20px !important;
+    margin-top: 0;
 }
 .ant-table-pagination{
     /* display: none !important; */
@@ -85,6 +81,4 @@ h3{
 .ant-pagination-item a{
     color: white !important;
 }
-.membership-table {
-    margin-right: 200px !important;
-}
+/* Cleaned up responsive layouts */

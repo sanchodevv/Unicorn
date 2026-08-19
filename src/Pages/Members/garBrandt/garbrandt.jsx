@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Table, Tag, Button, Input, Select, Modal, Form, Drawer } from "antd";
+import { Edit2, Trash2, Plus } from "lucide-react";
 import "./garbrandt.css"
 
 const { Option } = Select;
@@ -97,8 +98,8 @@ const Garbrandt = () => {
   },
   {
       title: 'Start Date',
-      dataIndex: 'startTime',
-      key: 'startTime',
+      dataIndex: 'startDate',
+      key: 'startDate',
     },
     {
         title: 'End Date',
@@ -129,9 +130,13 @@ const Garbrandt = () => {
     title: 'Action',
     key: 'action',
     render: (_, record) => (
-      <span>
-        <a onClick={() => handleEdit(record)} style={{ marginRight: 16 }}> <img src="/qalam.png" alt="" /> {record.lastName}</a>
-        <a onClick={() => handleDelete(record.key)}><img src="/delete.png" alt="" /></a>
+      <span className="loq">
+        <a onClick={() => handleEdit(record)} style={{ marginRight: 16 }} title="Edit">
+          <Edit2 size={16} style={{ color: '#9B74F0' }} />
+        </a>
+        <a onClick={() => handleDelete(record.key)} title="Delete">
+          <Trash2 size={16} style={{ color: '#ff4d4f' }} />
+        </a>
       </span>
     ),
   },
@@ -142,7 +147,7 @@ const Garbrandt = () => {
       <div className ='uno' style={{ marginBottom: 16 }}>
         <div className="sle">
           
-        <Button type="primary" className='add1' onClick={() => setDrawerVisible(true)}> <img src="/pilus.png" alt="" /> Add Membership</Button>
+        <Button type="primary" className='add1' onClick={() => setDrawerVisible(true)} icon={<Plus size={16} />}> Add Membership</Button>
         </div>
       </div>
       <h3 className='h3'>CODY GARBRANDT</h3>

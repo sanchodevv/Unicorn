@@ -15,8 +15,9 @@ const App = () => {
     return (
         <>
             <div className="wrap">
-                <Aside />
+                <Aside setIsLoggedIn={setIsLoggedIn} />
                 <div className="main">
+                    <Bar />
                     <Routes>
                         {
                             routes.map((route, index) => (
@@ -28,7 +29,6 @@ const App = () => {
                             ))
                         }
                     </Routes>
-                    <Bar />
                 </div>
             </div>
         </>

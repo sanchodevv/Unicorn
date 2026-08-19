@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Table, Tag, Button, Input, Select, Modal, Form, Drawer } from "antd";
 import { useTranslation } from "react-i18next";
+import { Edit2, Trash2, Plus, Search, Filter } from "lucide-react";
 import "./members.css"
 
 const { Option } = Select;
@@ -53,12 +54,13 @@ const Members = ({ setIsLoggedIn }) => {
       title: 'Action',
       key: 'action',
       render: (_, record) => (
-        <span>
-          <div className="loq">
-            <a onClick={() => setIsLoggedIn(false)}> <img src="/log-out.png" alt="" /></a>
-          <a  onClick={() => handleEdit(record)} style={{ marginRight: 16 }}>  <img src="/qalam.png" alt="" /> {record.lastName}</a>
-          <a onClick={() => handleDelete(record.key)}><img src="/delete.png" alt="" /></a>
-          </div>
+        <span className="loq">
+          <a onClick={() => handleEdit(record)} style={{ marginRight: 16 }} title={t('edit')}>
+            <Edit2 size={16} style={{ color: '#9B74F0' }} />
+          </a>
+          <a onClick={() => handleDelete(record.key)} title={t('delete')}>
+            <Trash2 size={16} style={{ color: '#ff4d4f' }} />
+          </a>
         </span>
       ),
     },
@@ -259,7 +261,7 @@ const Members = ({ setIsLoggedIn }) => {
       <div className ='uno' style={{ marginBottom: 16 }}>
         <div  className="inp">
 
-          <img src="/search.png" alt="" />
+          <Search size={18} style={{ color: '#9B74F0', marginLeft: '16px', marginRight: '8px', alignSelf: 'center' }} />
           <Input
           placeholder="Search by name"
           value={searchText}
@@ -275,12 +277,11 @@ const Members = ({ setIsLoggedIn }) => {
           style={{ width: 126, marginRight: 16 }}
         >
           
-          <Option value=""><img src="/filter.png" alt="" /> Filter</Option>
+          <Option value=""><span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}><Filter size={14} /> Filter</span></Option>
           <Option value="available">Available</Option>
           <Option value="outOfStock">Out of Stock</Option>
-          
         </Select>
-        <Button type="primary" onClick={() => setDrawerVisible(true)}> <img src="/pilus.png" alt="" /> Add New</Button>
+        <Button type="primary" onClick={() => setDrawerVisible(true)} icon={<Plus size={16} />}> Add New</Button>
         </div>
       </div>
       <div className="members-table-wrapper">

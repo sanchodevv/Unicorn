@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { ShoppingCart, Search } from "lucide-react";
 import "./pos.css";
 import { Input } from "antd";
 
@@ -10,7 +11,13 @@ const Pos = () => {
     const [isCartOpen, setIsCartOpen] = useState(false);
 
     const addToCart = (product) => {
-      setCart(prev => [...prev, { ...product, qty: 1 }]);
+      setCart(prev => {
+        const existing = prev.find(item => item.id === product.id);
+        if (existing) {
+          return prev.map(item => item.id === product.id ? { ...item, qty: item.qty + 1 } : item);
+        }
+        return [...prev, { ...product, qty: 1 }];
+      });
     };
 
     const increaseQty = (id) => {
@@ -50,13 +57,13 @@ useEffect(() => {
     return (
 <>
        <div className="sav">
-        <button className="cart-btn" onClick={() => setIsCartOpen(true)}>
-           <img src="./pos.png" alt="" />({cart.length})
-        </button>
+         <button className="cart-btn" onClick={() => setIsCartOpen(true)}>
+           <ShoppingCart size={22} /> ({cart.reduce((sum, item) => sum + item.qty, 0)})
+         </button>
        </div>
         <div  className="inp">
 
-          <img src="/search.png" alt="" />
+          <Search size={18} style={{ color: '#9B74F0', marginLeft: '16px', marginRight: '8px', alignSelf: 'center' }} />
           <Input
           placeholder={t('searchByName')}
           value={searchText}
@@ -71,7 +78,10 @@ useEffect(() => {
       <h2>{product.title}</h2>
       <p>{t('brand')}: {product.brand}</p>
       <p>{t('quality')}: {product.category}</p>
-      <button onClick={() => addToCart(product)}><img src="/pos.png" alt="" />{t('addToCart')} ({cart.length})</button>
+      <button onClick={() => addToCart(product)}>
+        <ShoppingCart size={16} style={{ marginRight: '8px' }} />
+        {t('addToCart')} ({cart.find(item => item.id === product.id)?.qty || 0})
+      </button>
     </div>
   ))}
   {isCartOpen && (

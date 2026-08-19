@@ -2,6 +2,19 @@ import "./home.css"
 import { useTranslation } from "react-i18next";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { useState } from "react";
+import { Users, Clock, Eye, ShoppingCart } from "lucide-react";
+
+const IconMap = {
+    Users,
+    Clock,
+    Eye,
+    ShoppingCart
+};
+
+const renderStatIcon = (iconName, color) => {
+    const IconComponent = IconMap[iconName];
+    return IconComponent ? <IconComponent size={28} style={{ color }} /> : null;
+};
 
 const Home = () => {
     const { t } = useTranslation();
@@ -9,7 +22,6 @@ const Home = () => {
     
     // Data for different periods
     const periodData = {
-      
         weekly: {
             chartData: [
                 { name: 'ЯНВ', value: 4000 },
@@ -28,10 +40,10 @@ const Home = () => {
             amount: '12,7 млн. сум',
             percentage: '+12%',
             stats: [
-                { label: 'ACTIVE MEMBERS', value: '8', icon: '👥', color: '#a78bfa' },
-                { label: 'EXPIRED MEMBERS', value: '8', icon: '⏰', color: '#a78bfa' },
-                { label: 'TODAY VISITS', value: '8', icon: '👁️', color: '#60a5fa' },
-                { label: 'OUT OF STOCK PRODUCTS', value: '8', icon: '🛒', color: '#a78bfa' },
+                { label: 'ACTIVE MEMBERS', value: '8', iconName: 'Users', color: '#a78bfa' },
+                { label: 'EXPIRED MEMBERS', value: '8', iconName: 'Clock', color: '#a78bfa' },
+                { label: 'TODAY VISITS', value: '8', iconName: 'Eye', color: '#60a5fa' },
+                { label: 'OUT OF STOCK PRODUCTS', value: '8', iconName: 'ShoppingCart', color: '#a78bfa' },
             ]
         },
         monthly: {
@@ -52,10 +64,10 @@ const Home = () => {
             amount: '45,2 млн. сум',
             percentage: '+28%',
             stats: [
-                { label: 'ACTIVE MEMBERS', value: '156', icon: '👥', color: '#a78bfa' },
-                { label: 'EXPIRED MEMBERS', value: '42', icon: '⏰', color: '#a78bfa' },
-                { label: 'TODAY VISITS', value: '287', icon: '👁️', color: '#60a5fa' },
-                { label: 'OUT OF STOCK PRODUCTS', value: '23', icon: '🛒', color: '#a78bfa' },
+                { label: 'ACTIVE MEMBERS', value: '156', iconName: 'Users', color: '#a78bfa' },
+                { label: 'EXPIRED MEMBERS', value: '42', iconName: 'Clock', color: '#a78bfa' },
+                { label: 'TODAY VISITS', value: '287', iconName: 'Eye', color: '#60a5fa' },
+                { label: 'OUT OF STOCK PRODUCTS', value: '23', iconName: 'ShoppingCart', color: '#a78bfa' },
             ]
         },
         yearly: {
@@ -75,10 +87,10 @@ const Home = () => {
             amount: '750,5 млн. сум',
             percentage: '+45%',
             stats: [
-                { label: 'ACTIVE MEMBERS', value: '1,245', icon: '👥', color: '#a78bfa' },
-                { label: 'EXPIRED MEMBERS', value: '342', icon: '⏰', color: '#a78bfa' },
-                { label: 'TODAY VISITS', value: '3,456', icon: '👁️', color: '#60a5fa' },
-                { label: 'OUT OF STOCK PRODUCTS', value: '187', icon: '🛒', color: '#a78bfa' },
+                { label: 'ACTIVE MEMBERS', value: '1,245', iconName: 'Users', color: '#a78bfa' },
+                { label: 'EXPIRED MEMBERS', value: '342', iconName: 'Clock', color: '#a78bfa' },
+                { label: 'TODAY VISITS', value: '3,456', iconName: 'Eye', color: '#60a5fa' },
+                { label: 'OUT OF STOCK PRODUCTS', value: '187', iconName: 'ShoppingCart', color: '#a78bfa' },
             ]
         }
     };
@@ -102,7 +114,6 @@ const Home = () => {
                     
                     {/* Period Toggle Buttons */}
                     <div className="period-buttons">
-                        
                         <button 
                             className={`period-btn ${selectedPeriod === 'weekly' ? 'active' : ''}`}
                             onClick={() => setSelectedPeriod('weekly')}
@@ -164,8 +175,8 @@ const Home = () => {
                     {currentData.stats.map((card, index) => (
                         <div key={index} className="stat-card">
                             <div className="stat-card-header">
-                                <span className="stat-card-icon" style={{ color: card.color }}>
-                                    {card.icon}
+                                <span className="stat-card-icon">
+                                    {renderStatIcon(card.iconName, card.color)}
                                 </span>
                                 <span className="stat-card-label">{card.label}</span>
                             </div>

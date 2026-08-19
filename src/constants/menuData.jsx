@@ -9,43 +9,43 @@ export const getMenuData = () => {
         {
             key: 0,
             path: "/",
-            img: "./public/home.png",
+            icon: "Home",
             name: t("home")
         },
         {
             key: 1,
             path: "/members",
-            img: "./public/members.png",
+            icon: "Users",
             name: t("members")
         },
         {
             key: 2,
             path: "/pos",
-            img: "./public/pos.png",
+            icon: "ShoppingCart",
             name: t("pos")
         },
         {
             key: 3,
             path: "/inventory",
-            img: "./public/inventory.png",
+            icon: "Boxes",
             name: t("inventory")
         },
         {
             key: 4,
             path: "/products",
-            img: "./public/products.png",
+            icon: "Package",
             name: t("products")
         },
         {
             key: 5,
             path: "/visit-history",
-            img: "./public/visit-history.png",
+            icon: "History",
             name: t("visitHistory")
         },
         {
             key: 6,
             path: "/payments",
-            img: "./public/payments.png",
+            icon: "CreditCard",
             name: t("payments")
         }
     ];

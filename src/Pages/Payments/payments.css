@@ -1,5 +1,6 @@
 .payments-table{
-    width: 1040px !important;
+    width: 100% !important;
+    max-width: 1110px;
 }
 .h3 span{
     color: #369B46;

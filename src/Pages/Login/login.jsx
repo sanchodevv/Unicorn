@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { User, Lock } from 'lucide-react';
 import './login.css';
 import { loginColumns } from './loginData';
 
@@ -30,8 +31,7 @@ const Login = ({ setIsLoggedIn }) => {
                 <div className="form-group">
                     <label htmlFor="username">{t('loginLabel')}</label>
                     <div className="input">
-                        <img src="./public/user.png
-                        " alt="" />
+                        <User size={20} className="login-icon" />
                         <input
                         type="text"
                         id="username"
@@ -44,7 +44,7 @@ const Login = ({ setIsLoggedIn }) => {
                 <div className="form-group">
                     <label htmlFor="password">{t('passwordLabel')}</label>
                     <div className="input">
-                        <img src="./public/kulf.png" alt="" />
+                        <Lock size={20} className="login-icon" />
                         <input
                         type="password"
                         id="password"

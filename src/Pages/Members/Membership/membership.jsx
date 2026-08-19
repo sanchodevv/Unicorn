@@ -1,5 +1,6 @@
 import { Button, Flex, Space, Table, Tag, Drawer, Form, Input, Select } from "antd";
 import { useState } from "react";
+import { Edit2, Trash2, Plus } from "lucide-react";
 import "./membership.css"
 
 const Membership = () => {
@@ -64,17 +65,23 @@ const Membership = () => {
         key: 'action',
         render: (_, record) => (
           <Space size="middle">
-            <a  onClick={() => handleEdit(record)} style={{ marginRight: 16 }}>  <img src="/qalam.png" alt="" /> {record.lastName}</a>
-              <a onClick={() => handleDelete(record.key)}><img src="/delete.png" alt="" /></a>
+            <a onClick={() => handleEdit(record)} style={{ marginRight: 16 }} title="Edit">
+              <Edit2 size={16} style={{ color: '#9B74F0' }} />
+            </a>
+            <a onClick={() => handleDelete(record.key)} title="Delete">
+              <Trash2 size={16} style={{ color: '#ff4d4f' }} />
+            </a>
           </Space>
         ),
       },
     ];
     return (
-        <>
-            <h3>Membership Types</h3>
-            <Button type="primary" onClick={() => setDrawerVisible(true)} className="add" style={{ marginBottom: 16, background: '#343743/', border: 'none' }}>
-              <img src="/pilus.png" alt="" />  Add New</Button>
+        <div className="membership-page">
+            <div className="page-header">
+                <h3>Membership Types</h3>
+                <Button type="primary" onClick={() => setDrawerVisible(true)} className="add-btn" style={{ background: '#343743', border: 'none' }} icon={<Plus size={16} />}>
+                  Add New</Button>
+            </div>
             
             <div className="membership-table-wrapper">
                 <Table columns={columns} dataSource={dataSource} 
@@ -158,7 +165,7 @@ const Membership = () => {
                     </Form.Item>
                 </Form>
             </Drawer>
-        </>
+        </div>
     )
 }
 export default Membership;

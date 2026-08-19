@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import LangSelect from "./select";
+import { Settings, Lock, Palette, Bell } from "lucide-react";
 
 const Bar = () => {
     const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -70,7 +71,7 @@ const Bar = () => {
                  <LangSelect />
                </div>
                <div className="settings" onClick={toggleSettings}>
-                    <img src="./public/settings.png" alt="settings" />
+                    <Settings size={22} className="bar-icon" />
                     {isSettingsOpen && (
                         <div className="settings-dropdown" onClick={(e) => e.stopPropagation()}>
                             {!showChangePassword ? (
@@ -81,7 +82,7 @@ const Bar = () => {
                                     </div>
                                     <div className="settings-content">
                                         <div className="settings-item" onClick={() => setShowChangePassword(true)}>
-                                            <span className="icon">🔐</span>
+                                            <span className="icon"><Lock size={18} /></span>
                                             <div className="setting-text">
                                                 <span className="label">{t('changePassword') || 'Change Password'}</span>
                                                 <span className="description">Update your password</span>
@@ -89,7 +90,7 @@ const Bar = () => {
                                             <span className="arrow">→</span>
                                         </div>
                                         <div className="settings-item">
-                                            <span className="icon">🎨</span>
+                                            <span className="icon"><Palette size={18} /></span>
                                             <div className="setting-text">
                                                 <span className="label">{t('theme') || 'Theme'}</span>
                                                 <span className="description">Dark / Light mode</span>
@@ -97,7 +98,7 @@ const Bar = () => {
                                             <span className="arrow">→</span>
                                         </div>
                                         <div className="settings-item">
-                                            <span className="icon">🔔</span>
+                                            <span className="icon"><Bell size={18} /></span>
                                             <div className="setting-text">
                                                 <span className="label">{t('notifications') || 'Notifications'}</span>
                                                 <span className="description">Manage alerts</span>

@@ -6,8 +6,8 @@ const options = [
   {
     value: "uz",
     label: (
-      <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-        <img src="./public/uzb.png" width="20" />
+      <div style={{ display: "flex", gap: "8px", alignItems: "center", fontSize: "18px" }}>
+        🇺🇿
       </div>
     ),
   },
@@ -15,16 +15,16 @@ const options = [
     value: "en",
     selected: true,
     label: (
-      <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-        <img src="./public/uk.png" width="20" />
+      <div style={{ display: "flex", gap: "8px", alignItems: "center", fontSize: "18px" }}>
+        🇬🇧
       </div>
     ),
   },
   {
     value: "ru",
     label: (
-      <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-        <img src="./public/rus.png" width="20" />
+      <div style={{ display: "flex", gap: "8px", alignItems: "center", fontSize: "18px" }}>
+        🇷🇺
       </div>
     ),
   },
